@@ -163,6 +163,53 @@ img{max-width:100%;display:block}
 .split p{margin-top:0;color:#334155;font-size:1.04rem}
 .ar-text{font-size:1.08rem}
 
+.about-profile-links{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:28px;
+}
+
+.about-profile-link{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+  padding:14px;
+  border:1px solid #d8e2ec;
+  border-radius:15px;
+  background:#f8fbfd;
+  color:#0f172a;
+  text-decoration:none;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+
+.about-profile-link:hover{
+  transform:translateY(-2px);
+  border-color:#7dd3fc;
+  box-shadow:0 12px 26px rgba(15,23,42,.09);
+}
+
+.about-profile-link .profile-mark{
+  width:40px;
+  height:40px;
+  flex:0 0 40px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  color:#fff;
+  font-weight:800;
+  font-size:.86rem;
+}
+
+.about-profile-link.orcid .profile-mark{background:#a6ce39}
+.about-profile-link.researchgate .profile-mark{background:#00bfae}
+.about-profile-link.archive .profile-mark{background:#f59e0b}
+.about-profile-link .profile-copy{min-width:0;display:block}
+.about-profile-link strong,.about-profile-link small{display:block;line-height:1.25}
+.about-profile-link strong{font-size:.94rem}
+.about-profile-link small{margin-top:3px;color:#475569;font-size:.72rem;overflow-wrap:anywhere}
+
 .section-dark{background:var(--bg);color:#fff}
 .section-dark h2{margin-bottom:32px}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -216,6 +263,7 @@ img{max-width:100%;display:block}
 @media (max-width:900px){
   .hero-grid,.split{grid-template-columns:1fr}
   .cards,.book-list{grid-template-columns:repeat(2,1fr)}
+  .about-profile-links{grid-template-columns:1fr}
   .hero{padding-top:72px}
 }
 
