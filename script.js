@@ -59,3 +59,15 @@ if (aboutContent && !aboutContent.querySelector('.about-profile-links')) {
     </a>`;
   aboutContent.appendChild(profileLinks);
 }
+
+// Keep the displayed book title consistent with the original 2006 publication.
+document.querySelectorAll('#books h3').forEach((heading) => {
+  heading.childNodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('Electrical Lighting Engineering')) {
+      node.textContent = node.textContent.replace(
+        'Electrical Lighting Engineering',
+        'Electrical Illumination Engineering'
+      );
+    }
+  });
+});
