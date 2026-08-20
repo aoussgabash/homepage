@@ -2,6 +2,7 @@ name: Insert About Profile Links
 
 on:
   push:
+    branches: [main]
     paths:
       - '.github/workflows/add-about-links.yml'
   workflow_dispatch:
@@ -46,7 +47,7 @@ jobs:
                   raise SystemExit('About marker not found')
               text = text.replace(marker, marker + links, 1)
 
-          text = text.replace('<script src="script.js"></script>', '<script src="script.js?v=20260820-2"></script>')
+          text = text.replace('<script src="script.js"></script>', '<script src="script.js?v=20260820-3"></script>')
           path.write_text(text, encoding='utf-8')
 
       - name: Commit direct HTML update
