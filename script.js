@@ -29,6 +29,38 @@ if (menuButton && navigation) {
   });
 }
 
+// Present the academic identity in English and Arabic throughout the homepage.
+const brandName = document.querySelector('.brand-name');
+if (brandName && !brandName.querySelector('.brand-name-ar')) {
+  const arabicBrandName = document.createElement('span');
+  arabicBrandName.className = 'brand-name-ar';
+  arabicBrandName.lang = 'ar';
+  arabicBrandName.dir = 'rtl';
+  arabicBrandName.textContent = 'أوس غباش';
+  brandName.appendChild(arabicBrandName);
+}
+
+const heroName = document.querySelector('.hero h1');
+if (heroName && !heroName.querySelector('.hero-name-ar')) {
+  const arabicHeroName = document.createElement('span');
+  arabicHeroName.className = 'hero-name-ar';
+  arabicHeroName.lang = 'ar';
+  arabicHeroName.dir = 'rtl';
+  arabicHeroName.textContent = 'الدكتور المهندس أوس غباش';
+  heroName.appendChild(arabicHeroName);
+}
+
+const footerIdentity = document.querySelector('.site-footer .footer-wrap > span:first-child');
+if (footerIdentity && !footerIdentity.querySelector('.footer-name-ar')) {
+  const separator = document.createTextNode(' | ');
+  const arabicFooterName = document.createElement('span');
+  arabicFooterName.className = 'footer-name-ar';
+  arabicFooterName.lang = 'ar';
+  arabicFooterName.dir = 'rtl';
+  arabicFooterName.textContent = 'الدكتور المهندس أوس غباش';
+  footerIdentity.append(separator, arabicFooterName);
+}
+
 const aboutContent = document.querySelector('#about .split > div:last-child');
 
 if (aboutContent && !aboutContent.querySelector('.about-profile-links')) {
