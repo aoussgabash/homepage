@@ -29,15 +29,22 @@ if (menuButton && navigation) {
   });
 }
 
-// Keep the top navigation visually clean: portrait only, without AG or repeated names.
+// Use the stored AG identity mark in the top navigation without repeating the name.
 const brandIdentity = document.querySelector('.brand-identity');
 if (brandIdentity) {
   brandIdentity.querySelector('.brand-code')?.remove();
   brandIdentity.querySelector('.brand-name')?.remove();
-  brandIdentity.setAttribute('aria-label', 'Aouss Gabash academic homepage | الصفحة الأكاديمية لأوس غباش');
+
+  const brandLogo = brandIdentity.querySelector('.brand-logo');
+  if (brandLogo) {
+    brandLogo.src = 'assets/brand/AG.svg';
+    brandLogo.alt = 'AG Academic Ecosystem logo | شعار منظومة AG الأكاديمية';
+  }
+
+  brandIdentity.setAttribute('aria-label', 'AG Academic Ecosystem homepage | الصفحة الرئيسية لمنظومة AG الأكاديمية');
 }
 
-// Present the main identity with a circular personal portrait before the English name.
+// Present the personal portrait above the bilingual academic name.
 const heroName = document.querySelector('.hero h1');
 if (heroName) {
   if (!heroName.querySelector('.hero-name-ar')) {
@@ -57,8 +64,8 @@ if (heroName) {
     heroPhoto.className = 'hero-profile-photo';
     heroPhoto.src = 'https://avatars.githubusercontent.com/u/312260129?v=4&s=400';
     heroPhoto.alt = 'Portrait of Dr.-Ing. Aouss Gabash | صورة الدكتور المهندس أوس غباش';
-    heroPhoto.width = 190;
-    heroPhoto.height = 190;
+    heroPhoto.width = 174;
+    heroPhoto.height = 174;
     heroPhoto.loading = 'eager';
     heroPhoto.fetchPriority = 'high';
 
@@ -71,128 +78,130 @@ if (heroName) {
   }
 }
 
-// Styles for a balanced portrait-and-name composition.
+// Styles for the stacked portrait-and-name composition.
 if (!document.querySelector('#hero-portrait-layout')) {
   const heroPortraitStyles = document.createElement('style');
   heroPortraitStyles.id = 'hero-portrait-layout';
   heroPortraitStyles.textContent = `
     .brand-identity {
-      min-width: 48px;
+      min-width: 52px;
       gap: 0;
     }
 
     .brand-identity .brand-logo {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       margin: 0;
+      padding: 0;
+      object-fit: contain;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      box-shadow: 0 8px 24px rgba(37, 99, 235, .24);
     }
 
     .hero-name-row {
-      display: grid;
-      grid-template-columns: clamp(170px, 16vw, 220px) minmax(0, 1fr);
-      align-items: center;
-      gap: clamp(24px, 3.2vw, 42px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 22px;
       width: 100%;
       margin: 0;
     }
 
     .hero-profile-photo {
-      width: 100%;
-      aspect-ratio: 1;
+      width: clamp(138px, 13vw, 174px);
+      height: clamp(138px, 13vw, 174px);
+      flex: 0 0 auto;
       display: block;
       object-fit: cover;
       object-position: center;
       border-radius: 50%;
-      border: 5px solid rgba(125, 211, 252, .82);
+      border: 5px solid rgba(125, 211,252,.82);
       background: #dbeafe;
       box-shadow:
-        0 24px 54px rgba(2, 8, 23, .42),
-        0 0 0 11px rgba(56, 189, 248, .08);
+        0 22px 50px rgba(2,8,23,.4),
+        0 0 0 10px rgba(56,189,248,.08);
     }
 
     .hero-name-copy {
       min-width: 0;
+      width: 100%;
     }
 
     .hero-name-row h1 {
       margin: 0;
-      max-width: 650px;
-      font-size: clamp(2.9rem, 5vw, 4.35rem);
-      line-height: .98;
-      letter-spacing: -.045em;
+      max-width: 620px;
+      font-size: clamp(2.55rem, 4.1vw, 3.65rem);
+      line-height: 1.02;
+      letter-spacing: -.035em;
     }
 
     .hero-name-row .hero-name-ar {
-      margin-top: .42em;
-      font-size: clamp(1.35rem, 2.3vw, 2rem);
-      line-height: 1.45;
+      margin-top: .38em;
       max-width: 100%;
-    }
-
-    @media (max-width: 1050px) {
-      .hero-name-row {
-        grid-template-columns: clamp(155px, 17vw, 190px) minmax(0, 1fr);
-        gap: 28px;
-      }
-
-      .hero-name-row h1 {
-        font-size: clamp(2.75rem, 5.7vw, 3.85rem);
-      }
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      line-height: 1.5;
     }
 
     @media (max-width: 900px) {
-      .hero-name-row {
-        grid-template-columns: 165px minmax(0, 1fr);
+      .hero-profile-photo {
+        width: 148px;
+        height: 148px;
       }
 
       .hero-name-row h1 {
-        font-size: clamp(2.75rem, 7vw, 3.75rem);
+        font-size: clamp(2.45rem, 6.5vw, 3.25rem);
       }
     }
 
     @media (max-width: 680px) {
+      .brand-identity {
+        min-width: 46px;
+      }
+
       .brand-identity .brand-logo {
-        width: 44px;
-        height: 44px;
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
       }
 
       .hero-name-row {
-        grid-template-columns: 132px minmax(0, 1fr);
-        align-items: center;
-        gap: 20px;
+        gap: 18px;
       }
 
       .hero-profile-photo {
+        width: 118px;
+        height: 118px;
         border-width: 4px;
         box-shadow:
-          0 16px 38px rgba(2, 8, 23, .38),
-          0 0 0 8px rgba(56, 189, 248, .08);
+          0 16px 38px rgba(2,8,23,.38),
+          0 0 0 8px rgba(56,189,248,.08);
       }
 
       .hero-name-row h1 {
-        font-size: clamp(2.25rem, 10vw, 3.15rem);
-        line-height: 1;
+        font-size: clamp(2.15rem, 9vw, 2.8rem);
+        line-height: 1.04;
       }
 
       .hero-name-row .hero-name-ar {
-        margin-top: .5em;
-        font-size: clamp(1.12rem, 5.5vw, 1.55rem);
-        line-height: 1.5;
+        margin-top: .45em;
+        font-size: clamp(1.08rem, 5.2vw, 1.45rem);
       }
     }
 
     @media (max-width: 480px) {
-      .hero-name-row {
-        grid-template-columns: 108px minmax(0, 1fr);
-        gap: 16px;
+      .hero-profile-photo {
+        width: 102px;
+        height: 102px;
       }
 
       .hero-name-row h1 {
-        font-size: clamp(1.95rem, 10.5vw, 2.65rem);
+        font-size: clamp(1.85rem, 9.5vw, 2.35rem);
       }
 
       .hero-name-row .hero-name-ar {
-        font-size: clamp(1rem, 5.4vw, 1.3rem);
+        font-size: clamp(1rem, 5vw, 1.25rem);
       }
     }
   `;
