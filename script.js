@@ -57,8 +57,8 @@ if (heroName) {
     heroPhoto.className = 'hero-profile-photo';
     heroPhoto.src = 'https://avatars.githubusercontent.com/u/312260129?v=4&s=400';
     heroPhoto.alt = 'Portrait of Dr.-Ing. Aouss Gabash | صورة الدكتور المهندس أوس غباش';
-    heroPhoto.width = 160;
-    heroPhoto.height = 160;
+    heroPhoto.width = 190;
+    heroPhoto.height = 190;
     heroPhoto.loading = 'eager';
     heroPhoto.fetchPriority = 'high';
 
@@ -71,7 +71,7 @@ if (heroName) {
   }
 }
 
-// Styles for the portrait-and-name composition. Added here to avoid duplicating layout rules.
+// Styles for a balanced portrait-and-name composition.
 if (!document.querySelector('#hero-portrait-layout')) {
   const heroPortraitStyles = document.createElement('style');
   heroPortraitStyles.id = 'hero-portrait-layout';
@@ -88,40 +88,65 @@ if (!document.querySelector('#hero-portrait-layout')) {
     }
 
     .hero-name-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: clamp(170px, 16vw, 220px) minmax(0, 1fr);
       align-items: center;
-      gap: clamp(20px, 2.6vw, 34px);
+      gap: clamp(24px, 3.2vw, 42px);
       width: 100%;
       margin: 0;
     }
 
     .hero-profile-photo {
-      width: clamp(118px, 11vw, 158px);
-      height: clamp(118px, 11vw, 158px);
-      flex: 0 0 auto;
+      width: 100%;
+      aspect-ratio: 1;
+      display: block;
       object-fit: cover;
       object-position: center;
       border-radius: 50%;
-      border: 4px solid rgba(125, 211, 252, .72);
+      border: 5px solid rgba(125, 211, 252, .82);
       background: #dbeafe;
       box-shadow:
-        0 22px 50px rgba(2, 8, 23, .42),
-        0 0 0 9px rgba(56, 189, 248, .08);
+        0 24px 54px rgba(2, 8, 23, .42),
+        0 0 0 11px rgba(56, 189, 248, .08);
     }
 
     .hero-name-copy {
       min-width: 0;
-      flex: 1 1 auto;
     }
 
     .hero-name-row h1 {
       margin: 0;
+      max-width: 650px;
+      font-size: clamp(2.9rem, 5vw, 4.35rem);
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+
+    .hero-name-row .hero-name-ar {
+      margin-top: .42em;
+      font-size: clamp(1.35rem, 2.3vw, 2rem);
+      line-height: 1.45;
+      max-width: 100%;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-name-row {
+        grid-template-columns: clamp(155px, 17vw, 190px) minmax(0, 1fr);
+        gap: 28px;
+      }
+
+      .hero-name-row h1 {
+        font-size: clamp(2.75rem, 5.7vw, 3.85rem);
+      }
     }
 
     @media (max-width: 900px) {
-      .hero-profile-photo {
-        width: 124px;
-        height: 124px;
+      .hero-name-row {
+        grid-template-columns: 165px minmax(0, 1fr);
+      }
+
+      .hero-name-row h1 {
+        font-size: clamp(2.75rem, 7vw, 3.75rem);
       }
     }
 
@@ -132,18 +157,42 @@ if (!document.querySelector('#hero-portrait-layout')) {
       }
 
       .hero-name-row {
-        flex-direction: column;
-        align-items: flex-start;
+        grid-template-columns: 132px minmax(0, 1fr);
+        align-items: center;
         gap: 20px;
       }
 
       .hero-profile-photo {
-        width: 112px;
-        height: 112px;
-        border-width: 3px;
+        border-width: 4px;
         box-shadow:
           0 16px 38px rgba(2, 8, 23, .38),
-          0 0 0 7px rgba(56, 189, 248, .08);
+          0 0 0 8px rgba(56, 189, 248, .08);
+      }
+
+      .hero-name-row h1 {
+        font-size: clamp(2.25rem, 10vw, 3.15rem);
+        line-height: 1;
+      }
+
+      .hero-name-row .hero-name-ar {
+        margin-top: .5em;
+        font-size: clamp(1.12rem, 5.5vw, 1.55rem);
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name-row {
+        grid-template-columns: 108px minmax(0, 1fr);
+        gap: 16px;
+      }
+
+      .hero-name-row h1 {
+        font-size: clamp(1.95rem, 10.5vw, 2.65rem);
+      }
+
+      .hero-name-row .hero-name-ar {
+        font-size: clamp(1rem, 5.4vw, 1.3rem);
       }
     }
   `;
