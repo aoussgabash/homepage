@@ -29,6 +29,9 @@ if (menuButton && navigation) {
   });
 }
 
+// Remove the bilingual academic eyebrow label from the hero section.
+document.querySelector('.hero .eyebrow')?.remove();
+
 // Use the stored AG identity mark in the top navigation without repeating the name.
 const brandIdentity = document.querySelector('.brand-identity');
 if (brandIdentity) {
