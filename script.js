@@ -144,6 +144,16 @@ if (!document.querySelector('#hero-portrait-layout')) {
       line-height: 1.5;
     }
 
+    .hero-title {
+      margin: 26px 0 10px;
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .hero-ar {
+      padding-left: 0;
+    }
+
     @media (max-width: 900px) {
       .hero-profile-photo {
         width: 148px;
