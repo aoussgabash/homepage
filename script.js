@@ -1,3 +1,101 @@
+const SITE_URL = 'https://aoussgabash.com/';
+const SITE_TITLE = 'Dr.-Ing. Aouss Gabash | Academic, Research and Engineering Portal';
+const SITE_DESCRIPTION = 'Official bilingual personal and academic website of Dr.-Ing. Aouss Gabash: electrical power systems, research, teaching, books, academic publishing, automation, optimization and artificial intelligence.';
+const SITE_LOGO = 'https://aoussgabash.com/assets/brand/AG.svg';
+
+function upsertMeta(selector, attributes) {
+  let element = document.head.querySelector(selector);
+  if (!element) {
+    element = document.createElement('meta');
+    document.head.appendChild(element);
+  }
+  Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
+  return element;
+}
+
+function upsertLink(selector, attributes) {
+  let element = document.head.querySelector(selector);
+  if (!element) {
+    element = document.createElement('link');
+    document.head.appendChild(element);
+  }
+  Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
+  return element;
+}
+
+document.title = SITE_TITLE;
+upsertMeta('meta[name="description"]', { name: 'description', content: SITE_DESCRIPTION });
+upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' });
+upsertMeta('meta[name="author"]', { name: 'author', content: 'Dr.-Ing. Aouss Gabash' });
+upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' });
+upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: 'Dr.-Ing. Aouss Gabash' });
+upsertMeta('meta[property="og:title"]', { property: 'og:title', content: SITE_TITLE });
+upsertMeta('meta[property="og:description"]', { property: 'og:description', content: SITE_DESCRIPTION });
+upsertMeta('meta[property="og:url"]', { property: 'og:url', content: SITE_URL });
+upsertMeta('meta[property="og:image"]', { property: 'og:image', content: SITE_LOGO });
+upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: 'AG Academic Ecosystem logo' });
+upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary' });
+upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: SITE_TITLE });
+upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: SITE_DESCRIPTION });
+upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: SITE_LOGO });
+upsertLink('link[rel="canonical"]', { rel: 'canonical', href: SITE_URL });
+upsertLink('link[rel="icon"]', { rel: 'icon', type: 'image/svg+xml', href: 'assets/brand/AG.svg' });
+upsertLink('link[rel="shortcut icon"]', { rel: 'shortcut icon', type: 'image/svg+xml', href: 'assets/brand/AG.svg' });
+upsertLink('link[rel="apple-touch-icon"]', { rel: 'apple-touch-icon', href: SITE_LOGO });
+
+if (!document.querySelector('#ag-website-schema')) {
+  const schema = document.createElement('script');
+  schema.id = 'ag-website-schema';
+  schema.type = 'application/ld+json';
+  schema.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': `${SITE_URL}#person`,
+        name: 'Dr.-Ing. Aouss Gabash',
+        alternateName: 'أوس غباش',
+        url: SITE_URL,
+        image: 'https://avatars.githubusercontent.com/u/312260129?v=4&s=400',
+        jobTitle: 'Electrical Power Systems Researcher, Educator and Author',
+        sameAs: [
+          'https://orcid.org/0000-0002-3720-7203',
+          'https://www.researchgate.net/profile/Aouss-Gabash',
+          'https://archive.org/details/@aouss_gabash'
+        ],
+        knowsAbout: [
+          'Electrical Power Systems',
+          'Artificial Intelligence',
+          'Automation',
+          'Optimization',
+          'Smart Energy Systems',
+          'Academic Publishing'
+        ]
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${SITE_URL}#website`,
+        url: SITE_URL,
+        name: 'Dr.-Ing. Aouss Gabash – Academic Portal',
+        alternateName: 'الموقع الأكاديمي للدكتور المهندس أوس غباش',
+        description: SITE_DESCRIPTION,
+        publisher: { '@id': `${SITE_URL}#person` },
+        inLanguage: ['en', 'ar', 'de']
+      },
+      {
+        '@type': 'ProfilePage',
+        '@id': `${SITE_URL}#profile`,
+        url: SITE_URL,
+        name: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+        mainEntity: { '@id': `${SITE_URL}#person` },
+        isPartOf: { '@id': `${SITE_URL}#website` }
+      }
+    ]
+  });
+  document.head.appendChild(schema);
+}
+
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.site-nav');
 const yearElement = document.querySelector('#year');
