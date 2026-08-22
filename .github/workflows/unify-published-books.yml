@@ -1,0 +1,95 @@
+name: Unify published book cards
+
+on:
+  push:
+    paths:
+      - '.github/workflows/unify-published-books.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unify-books:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace both published book cards with matching structure
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          unified = '''          <article class="published-book-card published-book-unified">
+            <span>Published · Arabic · Second Edition · 2006 | <span lang="ar" dir="rtl">منشور · بالعربية · الطبعة الثانية · 2006</span></span>
+            <h3>Electrical Illumination Engineering<span class="card-ar" lang="ar" dir="rtl">هندسة الإنارة الكهربائية</span></h3>
+            <p><strong>Academic description:</strong> A theoretical and practical engineering reference covering electrical lighting projects, illumination calculations, lamps, and lighting design.</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الوصف الأكاديمي:</strong> مرجع هندسي نظري وعملي يتناول مشاريع الإنارة الكهربائية، والحسابات الضوئية، والمصابيح، وتصميم الإنارة.</p>
+            <p><strong>Author:</strong> Aouss Gabash</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>المؤلف:</strong> أوس غباش</p>
+            <p><strong>Publication:</strong> Second edition · 2006 · Al-Radwan Publishing House</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>بيانات النشر:</strong> الطبعة الثانية · 2006 · دار الرضوان للنشر</p>
+            <p><strong>ISBN:</strong> Not available</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الرقم الدولي:</strong> غير متوفر</p>
+            <div class="published-book-action">
+              <a class="button primary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Read on Internet Archive | القراءة في الأرشيف</a>
+            </div>
+          </article>
+
+          <article class="published-book-card published-book-unified">
+            <span>Published · English · 2014 | <span lang="ar" dir="rtl">منشور · بالإنجليزية · 2014</span></span>
+            <h3>Flexible Optimal Operations of Energy Supply Networks<span class="card-ar" lang="ar" dir="rtl">التشغيل الأمثل المرن لشبكات إمداد الطاقة</span></h3>
+            <p><strong>Academic description:</strong> An academic monograph on flexible optimal operation of energy supply networks with renewable energy generation and battery storage integration.</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الوصف الأكاديمي:</strong> كتاب أكاديمي حول التشغيل الأمثل المرن لشبكات إمداد الطاقة ودمج توليد الطاقة المتجددة وأنظمة تخزين البطاريات.</p>
+            <p><strong>Author:</strong> Aouss Gabash</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>المؤلف:</strong> أوس غباش</p>
+            <p><strong>Publication:</strong> 2014 · English edition</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>بيانات النشر:</strong> 2014 · طبعة باللغة الإنجليزية</p>
+            <p><strong>ISBN:</strong> 978-3-8381-3838-7</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الرقم الدولي:</strong> 978-3-8381-3838-7</p>
+            <div class="published-book-action">
+              <a class="button primary" href="https://www.amazon.de/dp/3838138384" target="_blank" rel="noopener noreferrer">View on Amazon | العرض على أمازون</a>
+            </div>
+          </article>
+'''
+
+          pattern = r'\s*<article class="published-book-card"[\s\S]*?</article>\s*<article class="published-english-book-card"[\s\S]*?</article>'
+          updated, count = re.subn(pattern, '\n' + unified.rstrip(), text, count=1, flags=re.I)
+          if count != 1:
+              raise SystemExit('Could not locate the two published book cards.')
+
+          style_block = '''
+<style id="published-books-unified-style">
+  .book-list .published-book-unified{display:flex;flex-direction:column;min-height:100%;border-color:rgba(56,189,248,.48)!important;background:linear-gradient(180deg,#fff,#f4faff)!important}
+  .published-book-unified>span{min-height:56px;display:flex;align-items:flex-start;flex-wrap:wrap}
+  .published-book-unified h3{min-height:112px}
+  .published-book-unified p{margin-top:12px}
+  .published-book-unified .published-book-action{display:flex;margin-top:auto;padding-top:20px}
+  .published-book-unified .published-book-action .button{width:100%;min-height:58px;display:flex;align-items:center;justify-content:center;text-align:center}
+  @media(max-width:680px){.published-book-unified h3{min-height:0}.published-book-unified>span{min-height:0}.published-book-unified .published-book-action .button{min-height:54px}}
+</style>
+'''
+          if 'id="published-books-unified-style"' not in updated:
+              updated = updated.replace('</head>', style_block + '</head>', 1)
+
+          path.write_text(updated, encoding='utf-8')
+
+          workflow = Path('.github/workflows/unify-published-books.yml')
+          if workflow.exists():
+              workflow.unlink()
+
+      - name: Validate and commit
+        run: |
+          test "$(grep -c 'published-book-card published-book-unified' index.html)" -eq 2
+          test "$(grep -c 'published-book-action' index.html)" -eq 2
+          grep -q '978-3-8381-3838-7' index.html
+          grep -q 'ISBN:</strong> Not available' index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unify published book cards point by point"
+          git push
