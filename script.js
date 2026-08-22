@@ -274,3 +274,27 @@ document.querySelectorAll('#books h3').forEach((heading) => {
     }
   });
 });
+
+// Distinguish the research platform from Gabash Academic Press.
+const researchProjectCard = [...document.querySelectorAll('#projects .project-card')].find((card) =>
+  card.querySelector('.project-code .suffix')?.textContent.trim() === 'RS'
+);
+
+if (researchProjectCard) {
+  const heading = researchProjectCard.querySelector('h3');
+  if (heading) {
+    heading.childNodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) node.textContent = 'Research';
+    });
+    const arabicHeading = heading.querySelector('.card-ar');
+    if (arabicHeading) arabicHeading.textContent = 'البحث';
+  }
+
+  const descriptions = researchProjectCard.querySelectorAll('p');
+  if (descriptions[0]) {
+    descriptions[0].textContent = 'Research areas, scientific projects, methods, results, and academic collaboration.';
+  }
+  if (descriptions[1]) {
+    descriptions[1].textContent = 'مجالات البحث والمشاريع العلمية والمنهجيات والنتائج والتعاون الأكاديمي.';
+  }
+}
