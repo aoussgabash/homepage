@@ -50,7 +50,7 @@ jobs:
               <a class="button secondary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Book details | تفاصيل الكتاب</a>
             </div>
           </article>
-'''
+          '''
 
           if 'class="published-book-card"' not in text:
               text = text.replace(marker, marker + card, 1)
@@ -80,5 +80,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Add 2006 second edition illumination book"
-          git push
+          if git diff --cached --quiet; then
+            echo "The illumination book card is already present."
+          else
+            git commit -m "Add 2006 second edition illumination book"
+            git push
+          fi
