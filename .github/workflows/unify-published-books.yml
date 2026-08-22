@@ -93,18 +93,23 @@ jobs:
               workflow.unlink()
 
       - name: Validate and commit
+        shell: python
         run: |
-          test "$(grep -c 'published-book-card published-book-unified' index.html)" -eq 2
-          test "$(grep -c 'published-book-cover' index.html)" -eq 2
-          test "$(grep -c 'published-book-action' index.html)" -eq 2
-          grep -q '978-3-8381-3838-7' index.html
-          grep -q 'ISBN:</strong> Not available' index.html
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes needed."
-          else
-            git commit -m "Unify book cards and add cover placeholders"
-            git push
-          fi
+          from pathlib import Path
+          import subprocess
+
+          text = Path('index.html').read_text(encoding='utf-8')
+          assert text.count('class="published-book-card published-book-unified"') == 2
+          assert text.count('<div class="published-book-cover"') == 2
+          assert text.count('<div class="published-book-action"') == 2
+          assert '978-3-8381-3838-7' in text
+          assert 'ISBN:</strong> Not available' in text
+
+          subprocess.run(['git', 'config', 'user.name', 'github-actions[bot]'], check=True)
+          subprocess.run(['git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          subprocess.run(['git', 'add', '-A'], check=True)
+          if subprocess.run(['git', 'diff', '--cached', '--quiet']).returncode == 0:
+              print('No changes needed.')
+          else:
+              subprocess.run(['git', 'commit', '-m', 'Unify book cards and add cover placeholders'], check=True)
+              subprocess.run(['git', 'push'], check=True)
