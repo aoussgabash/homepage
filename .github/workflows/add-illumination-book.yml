@@ -1,0 +1,84 @@
+name: Add published illumination book
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-illumination-book.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-homepage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add the 2006 second-edition book card
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          text = text.replace(
+              'Current and upcoming titles',
+              'Published and upcoming titles',
+              1
+          )
+          text = text.replace(
+              'الكتب الحالية والقادمة',
+              'الكتب المنشورة والحالية والقادمة',
+              1
+          )
+
+          marker = '        <div class="book-list">\n'
+          if marker not in text:
+              raise SystemExit('Books list marker was not found in index.html')
+
+          card = '''          <article class="published-book-card" style="border-color:rgba(56,189,248,.48);background:linear-gradient(180deg,#ffffff,#f4faff)">
+            <span>Published · Second Edition · 2006 | <span lang="ar" dir="rtl">منشور · الطبعة الثانية · 2006</span></span>
+            <h3>Electrical Illumination Engineering<span class="card-ar" lang="ar" dir="rtl">هندسة الإنارة الكهربائية</span></h3>
+            <p><strong>Arabic engineering textbook by Aouss Mahmoud Gabash.</strong> A theoretical and practical reference for electrical lighting projects, illumination calculations, lamps, and lighting design.</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>كتاب هندسي عربي من تأليف أوس محمود غباش.</strong> مرجع نظري وعملي لتنفيذ مشاريع الإنارة الكهربائية، والحسابات الضوئية، والمصابيح، وتصميم الإنارة.</p>
+            <p><strong>Publication:</strong> Second edition, 2006 (1426 AH) · Al-Radwan Publishing House · Author copyright and printing rights reserved.</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>بيانات النشر:</strong> الطبعة الثانية، 2006م (1426هـ) · دار الرضوان للنشر · جميع حقوق التأليف والطبع محفوظة للمؤلف.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+              <a class="button primary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Read on Internet Archive | القراءة في الأرشيف</a>
+              <a class="button secondary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Book details | تفاصيل الكتاب</a>
+            </div>
+          </article>
+'''
+
+          if 'class="published-book-card"' not in text:
+              text = text.replace(marker, marker + card, 1)
+
+          text = text.replace(
+              'Updated academic edition of the Arabic engineering book first published in 2006.',
+              'A future updated edition building on the second Arabic edition published in 2006.',
+              1
+          )
+          text = text.replace(
+              'طبعة أكاديمية محدثة من الكتاب الهندسي العربي المنشور لأول مرة عام 2006.',
+              'طبعة أكاديمية محدثة مستقبلية مبنية على الطبعة العربية الثانية المنشورة عام 2006.',
+              1
+          )
+
+          path.write_text(text, encoding='utf-8')
+
+          workflow = Path('.github/workflows/add-illumination-book.yml')
+          if workflow.exists():
+              workflow.unlink()
+
+      - name: Validate and commit
+        run: |
+          grep -q 'published-book-card' index.html
+          grep -q 'Second Edition · 2006' index.html
+          grep -q 'الطبعة الثانية · 2006' index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Add 2006 second edition illumination book"
+          git push
