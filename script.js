@@ -79,6 +79,7 @@ if (!document.querySelector('#hero-portrait-layout')) {
     .hero-name-row{display:flex;flex-direction:column;align-items:flex-start;gap:22px;width:100%;margin:0}.hero-profile-photo{width:clamp(138px,13vw,174px);height:clamp(138px,13vw,174px);flex:0 0 auto;display:block;object-fit:cover;object-position:center;border-radius:50%;border:5px solid rgba(125,211,252,.82);background:#dbeafe;box-shadow:0 22px 50px rgba(2,8,23,.4),0 0 0 10px rgba(56,189,248,.08)}
     .hero-name-copy{min-width:0;width:100%}.hero-name-row h1{margin:0;max-width:620px;font-size:clamp(2.55rem,4.1vw,3.65rem);line-height:1.02;letter-spacing:-.035em}.hero-name-row .hero-name-ar{margin-top:.38em;max-width:100%;font-size:clamp(1.25rem,2vw,1.75rem);line-height:1.5}.hero-title{margin:26px 0 10px;padding-left:0;border-left:0}.hero-ar{padding-left:0}
     .project-card[data-project-link]{cursor:pointer}.project-card[data-project-link]:focus-visible{outline:3px solid #38bdf8;outline-offset:4px}
+    .project-card.press-card-unified{background:linear-gradient(180deg,#0f3454,#0b2d4a)!important;border-color:rgba(56,189,248,.42)!important;box-shadow:0 18px 48px rgba(2,18,38,.22)!important}.project-card.press-card-unified:hover{border-color:rgba(56,189,248,.72)!important;box-shadow:0 22px 58px rgba(2,18,38,.3)!important}.project-card.press-card-unified .project-code{background:rgba(14,116,144,.34)!important}
     @media(max-width:900px){.hero-profile-photo{width:148px;height:148px}.hero-name-row h1{font-size:clamp(2.45rem,6.5vw,3.25rem)}}
     @media(max-width:680px){.brand-identity{min-width:46px}.brand-identity .brand-logo{width:46px;height:46px;border-radius:10px}.hero-name-row{gap:18px}.hero-profile-photo{width:118px;height:118px;border-width:4px;box-shadow:0 16px 38px rgba(2,8,23,.38),0 0 0 8px rgba(56,189,248,.08)}.hero-name-row h1{font-size:clamp(2.15rem,9vw,2.8rem);line-height:1.04}.hero-name-row .hero-name-ar{margin-top:.45em;font-size:clamp(1.08rem,5.2vw,1.45rem)}}
     @media(max-width:480px){.hero-profile-photo{width:102px;height:102px}.hero-name-row h1{font-size:clamp(1.85rem,9.5vw,2.35rem)}.hero-name-row .hero-name-ar{font-size:clamp(1rem,5vw,1.25rem)}}`;
@@ -155,6 +156,7 @@ function makeProjectCardLink(card, url, label) {
 }
 
 const pressProjectCard = projectCards.find((card) => card.querySelector('.project-code .suffix')?.textContent.trim() === 'PR');
+if (pressProjectCard) pressProjectCard.classList.add('press-card-unified');
 makeProjectCardLink(
   pressProjectCard,
   'https://press.aoussgabash.com',
