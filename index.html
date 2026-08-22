@@ -9,6 +9,18 @@
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/aoussgabash/AI-Electrical-Power-Systems/main/favicon-32x32.png">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="identity.css">
+
+<style id="published-books-unified-style">
+  .book-list .published-book-unified{display:flex;flex-direction:column;min-height:100%;border-color:rgba(56,189,248,.48)!important;background:linear-gradient(180deg,#fff,#f4faff)!important}
+  .published-book-cover{width:100%;aspect-ratio:3/2;margin-bottom:20px;border:2px dashed rgba(56,189,248,.45);border-radius:16px;background:linear-gradient(145deg,#eaf6ff,#f8fbff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#0f4c75;font-weight:800}
+  .published-book-cover span{font-size:1.05rem}.published-book-cover small{display:block;margin-top:6px;font-size:.9rem;font-weight:700;color:#35617d}
+  .published-book-unified>span{min-height:56px;display:flex;align-items:flex-start;flex-wrap:wrap}
+  .published-book-unified h3{min-height:112px}
+  .published-book-unified p{margin-top:12px}
+  .published-book-unified .published-book-action{display:flex;margin-top:auto;padding-top:20px}
+  .published-book-unified .published-book-action .button{width:100%;min-height:58px;display:flex;align-items:center;justify-content:center;text-align:center}
+  @media(max-width:680px){.published-book-unified h3{min-height:0}.published-book-unified>span{min-height:0}.published-book-unified .published-book-action .button{min-height:54px}}
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -521,29 +533,45 @@
           <span class="heading-ar" lang="ar" dir="rtl">الكتب المنشورة والحالية والقادمة</span>
         </h2>
         <div class="book-list">
-          <article class="published-book-card" style="border-color:rgba(56,189,248,.48);background:linear-gradient(180deg,#ffffff,#f4faff)">
-  <span>Published · Second Edition · 2006 | <span lang="ar" dir="rtl">منشور · الطبعة الثانية · 2006</span></span>
-  <h3>Electrical Illumination Engineering<span class="card-ar" lang="ar" dir="rtl">هندسة الإنارة الكهربائية</span></h3>
-  <p><strong>Arabic engineering textbook by Aouss Gabash.</strong> A theoretical and practical reference for electrical lighting projects, illumination calculations, lamps, and lighting design.</p>
-  <p class="ar-copy" lang="ar" dir="rtl"><strong>كتاب هندسي عربي من تأليف أوس غباش.</strong> مرجع نظري وعملي لتنفيذ مشاريع الإنارة الكهربائية، والحسابات الضوئية، والمصابيح، وتصميم الإنارة.</p>
-  <p><strong>Publication:</strong> Second edition, 2006 · Al-Radwan Publishing House · Author copyright and printing rights reserved.</p>
-  <p class="ar-copy" lang="ar" dir="rtl"><strong>بيانات النشر:</strong> الطبعة الثانية، 2006م · دار الرضوان للنشر · جميع حقوق التأليف والطبع محفوظة للمؤلف.</p>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
-    <a class="button primary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Read on Internet Archive | القراءة في الأرشيف</a>
-  </div>
-</article>
-<article class="published-english-book-card" style="border-color:rgba(56,189,248,.48);background:linear-gradient(180deg,#ffffff,#f4faff)">
-  <span>Published · English · 2014 | <span lang="ar" dir="rtl">منشور · باللغة الإنجليزية · 2014</span></span>
-  <h3>Flexible Optimal Operations of Energy Supply Networks<span class="card-ar" lang="ar" dir="rtl">التشغيل الأمثل المرن لشبكات إمداد الطاقة</span></h3>
-  <p><strong>With Renewable Energy Generation and Battery Storage.</strong> An academic monograph on the flexible optimal operation of energy supply networks with renewable generation and battery storage integration.</p>
-  <p class="ar-copy" lang="ar" dir="rtl"><strong>مع توليد الطاقة المتجددة وتخزين البطاريات.</strong> كتاب أكاديمي حول التشغيل الأمثل المرن لشبكات إمداد الطاقة ودمج مصادر الطاقة المتجددة وأنظمة تخزين البطاريات.</p>
-  <p><strong>Author:</strong> Aouss Gabash · <strong>Language:</strong> English · <strong>ISBN-10:</strong> 3838138384 · <strong>ISBN-13:</strong> 978-3838138387</p>
-  <p class="ar-copy" lang="ar" dir="rtl"><strong>المؤلف:</strong> أوس غباش · <strong>اللغة:</strong> الإنجليزية · <strong>الرقم الدولي:</strong> 978-3838138387</p>
-  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
-    <a class="button primary" href="https://www.amazon.de/dp/3838138384" target="_blank" rel="noopener noreferrer">View on Amazon | العرض على أمازون</a>
-  </div>
-</article>
-    
+          <article class="published-book-card published-book-unified">
+            <div class="published-book-cover" aria-label="Book cover placeholder | مكان غلاف الكتاب">
+              <span>Book Cover</span>
+              <small lang="ar" dir="rtl">مكان غلاف الكتاب</small>
+            </div>
+            <span>Published · Arabic · Second Edition · 2006 | <span lang="ar" dir="rtl">منشور · بالعربية · الطبعة الثانية · 2006</span></span>
+            <h3>Electrical Illumination Engineering<span class="card-ar" lang="ar" dir="rtl">هندسة الإنارة الكهربائية</span></h3>
+            <p><strong>Academic description:</strong> A theoretical and practical engineering reference covering electrical lighting projects, illumination calculations, lamps, and lighting design.</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الوصف الأكاديمي:</strong> مرجع هندسي نظري وعملي يتناول مشاريع الإنارة الكهربائية، والحسابات الضوئية، والمصابيح، وتصميم الإنارة.</p>
+            <p><strong>Author:</strong> Aouss Gabash</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>المؤلف:</strong> أوس غباش</p>
+            <p><strong>Publication:</strong> Second edition · 2006 · Al-Radwan Publishing House</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>بيانات النشر:</strong> الطبعة الثانية · 2006 · دار الرضوان للنشر</p>
+            <p><strong>ISBN:</strong> Not available</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الرقم الدولي:</strong> غير متوفر</p>
+            <div class="published-book-action">
+              <a class="button primary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Read on Internet Archive | القراءة في الأرشيف</a>
+            </div>
+          </article>
+
+          <article class="published-book-card published-book-unified">
+            <div class="published-book-cover" aria-label="Book cover placeholder | مكان غلاف الكتاب">
+              <span>Book Cover</span>
+              <small lang="ar" dir="rtl">مكان غلاف الكتاب</small>
+            </div>
+            <span>Published · English · 2014 | <span lang="ar" dir="rtl">منشور · بالإنجليزية · 2014</span></span>
+            <h3>Flexible Optimal Operations of Energy Supply Networks<span class="card-ar" lang="ar" dir="rtl">التشغيل الأمثل المرن لشبكات إمداد الطاقة</span></h3>
+            <p><strong>Academic description:</strong> An academic monograph on flexible optimal operation of energy supply networks with renewable energy generation and battery storage integration.</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الوصف الأكاديمي:</strong> كتاب أكاديمي حول التشغيل الأمثل المرن لشبكات إمداد الطاقة ودمج توليد الطاقة المتجددة وأنظمة تخزين البطاريات.</p>
+            <p><strong>Author:</strong> Aouss Gabash</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>المؤلف:</strong> أوس غباش</p>
+            <p><strong>Publication:</strong> 2014 · English edition</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>بيانات النشر:</strong> 2014 · طبعة باللغة الإنجليزية</p>
+            <p><strong>ISBN:</strong> 978-3-8381-3838-7</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>الرقم الدولي:</strong> 978-3-8381-3838-7</p>
+            <div class="published-book-action">
+              <a class="button primary" href="https://www.amazon.de/dp/3838138384" target="_blank" rel="noopener noreferrer">View on Amazon | العرض على أمازون</a>
+            </div>
+          </article>
           <article>
             <span>In preparation | <span lang="ar" dir="rtl">قيد الإعداد</span></span>
             <h3>AI Applications in Electrical Power Systems<span class="card-ar" lang="ar" dir="rtl">تطبيقات الذكاء الاصطناعي في أنظمة الطاقة الكهربائية</span></h3>
