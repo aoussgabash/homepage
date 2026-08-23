@@ -2,6 +2,8 @@ name: Insert static 2023 book
 
 on:
   push:
+    paths:
+      - '.github/workflows/static-book-2023-insert.yml'
   workflow_dispatch:
 
 permissions:
@@ -9,28 +11,25 @@ permissions:
 
 jobs:
   insert:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Insert static card
-        shell: python
         run: |
+          python - <<'PY'
           from pathlib import Path
 
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
 
-          if 'data-editorial-volume="2023"' in s:
-              raise SystemExit(0)
+          if 'data-editorial-volume="2023"' not in s:
+              anchor = '          <article>\n            <span>In preparation |'
+              pos = s.find(anchor)
+              if pos < 0:
+                  raise SystemExit('Static insertion anchor not found')
 
-          anchor = '          <article>\n            <span>In preparation |'
-          pos = s.find(anchor)
-          if pos < 0:
-              raise SystemExit('Static insertion anchor not found')
-
-          card = '''          <article class="published-book-card published-book-unified" data-editorial-volume="2023">
+              card = '''          <article class="published-book-card published-book-unified" data-editorial-volume="2023">
             <div class="published-book-gallery">
               <div class="published-book-frame">
                 <img src="assets/books/selection-c3-front.jpg" alt="Front cover of Energy Optimization for Sustainable Resilience and Climate Stability – C+++ Framework | الغلاف الأمامي لمجموعة تحسين الطاقة من أجل المرونة المستدامة والاستقرار المناخي" loading="lazy" decoding="async">
@@ -56,8 +55,8 @@ jobs:
           </article>
 
 '''
-
-          p.write_text(s[:pos] + card + s[pos:], encoding='utf-8')
+              p.write_text(s[:pos] + card + s[pos:], encoding='utf-8')
+          PY
 
       - name: Verify and clean workflows
         run: |
