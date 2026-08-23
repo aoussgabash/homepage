@@ -35,12 +35,12 @@
     document.head.appendChild(styles);
   }
 
-  let card = bookList.querySelector('[data-editorial-volume="2023"]');
-  if (!card) {
-    card = document.createElement('article');
-    card.className = 'published-book-card published-book-unified';
-    card.dataset.editorialVolume = '2023';
-    card.innerHTML = `
+  let editorialCard = bookList.querySelector('[data-editorial-volume="2023"]');
+  if (!editorialCard) {
+    editorialCard = document.createElement('article');
+    editorialCard.className = 'published-book-card published-book-unified';
+    editorialCard.dataset.editorialVolume = '2023';
+    editorialCard.innerHTML = `
       <div class="published-book-gallery" data-book-gallery>
         <div class="published-book-frame"><img src="assets/books/selection-c3-front.jpg" data-front="assets/books/selection-c3-front.jpg" data-back="assets/books/selection-c3-back.jpg" data-side="front" alt="Front cover of Energy Optimization for Sustainable Resilience and Climate Stability – C+++ Framework" loading="lazy" decoding="async" fetchpriority="low"></div>
         <button class="published-book-toggle" type="button" data-book-toggle>View Back Cover | عرض الغلاف الخلفي</button>
@@ -63,21 +63,44 @@
 
     const publishedCards = bookList.querySelectorAll('.published-book-card');
     const lastPublishedCard = publishedCards[publishedCards.length - 1];
-    if (lastPublishedCard) lastPublishedCard.insertAdjacentElement('afterend', card);
-    else bookList.prepend(card);
+    if (lastPublishedCard) lastPublishedCard.insertAdjacentElement('afterend', editorialCard);
+    else bookList.prepend(editorialCard);
   }
 
-  bookList.querySelectorAll('.published-book-card .published-book-action .button').forEach((link) => {
-    link.textContent = libraryLabel;
-    link.href = libraryUrl;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.className = 'button primary';
-    link.setAttribute('aria-label', libraryLabel);
+  const publishedCards = [...bookList.querySelectorAll('.published-book-card')];
+  publishedCards.forEach((card) => {
+    card.classList.add('published-book-unified');
+
+    const image = card.querySelector('img[data-front][data-back]');
+    if (image) {
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      image.fetchPriority = 'low';
+      if (!image.dataset.side) image.dataset.side = 'front';
+    }
+
+    const toggle = card.querySelector('[data-book-toggle]');
+    if (toggle) {
+      toggle.classList.add('published-book-toggle');
+      toggle.type = 'button';
+      toggle.textContent = image?.dataset.side === 'back'
+        ? 'View Front Cover | عرض الغلاف الأمامي'
+        : 'View Back Cover | عرض الغلاف الخلفي';
+    }
+
+    const link = card.querySelector('.published-book-action .button');
+    if (link) {
+      link.textContent = libraryLabel;
+      link.href = libraryUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'button primary';
+      link.setAttribute('aria-label', libraryLabel);
+    }
   });
 
   if (!bookList.querySelector('.upcoming-books-divider')) {
-    const firstUpcoming = card.nextElementSibling;
+    const firstUpcoming = editorialCard.nextElementSibling;
     if (firstUpcoming) {
       const divider = document.createElement('div');
       divider.className = 'upcoming-books-divider';
@@ -92,11 +115,16 @@
     }
   }
 
-  const image = card.querySelector('img[data-front][data-back]');
-  const toggle = card.querySelector('[data-book-toggle]');
-  if (image && toggle && !toggle.dataset.bound) {
-    toggle.dataset.bound = 'true';
-    toggle.addEventListener('click', () => {
+  if (!bookList.dataset.galleryDelegated) {
+    bookList.dataset.galleryDelegated = 'true';
+    bookList.addEventListener('click', (event) => {
+      const toggle = event.target.closest('[data-book-toggle]');
+      if (!toggle || !bookList.contains(toggle)) return;
+
+      const gallery = toggle.closest('[data-book-gallery]');
+      const image = gallery?.querySelector('img[data-front][data-back]');
+      if (!image) return;
+
       const showingBack = image.dataset.side === 'back';
       image.src = showingBack ? image.dataset.front : image.dataset.back;
       image.dataset.side = showingBack ? 'front' : 'back';
