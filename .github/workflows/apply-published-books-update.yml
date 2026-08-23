@@ -1,0 +1,31 @@
+name: Apply unified published books content
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-published-books-update.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update published book cards
+        run: python3 tools/update_published_books.py
+      - name: Validate and commit
+        run: |
+          grep -q 'This book delves into both theoretical and practical aspects' index.html
+          grep -q 'This book presents a systematic study consisting of modeling' index.html
+          grep -q 'LAP LAMBERT Academic Publishing' index.html
+          grep -q '978-3838138381' index.html
+          test "$(grep -o 'class="book-meta"' index.html | wc -l)" -eq 2
+          rm -f .github/workflows/apply-published-books-update.yml tools/update_published_books.py
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unify published book cards and add bilingual abstracts"
+          git push
