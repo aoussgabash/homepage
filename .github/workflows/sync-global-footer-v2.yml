@@ -33,7 +33,7 @@ jobs:
 .ag-canonical-footer{background:#06101c;border-top:1px solid rgba(255,255,255,.1);padding:42px 0;color:#aebfd0}
 .ag-footer-inner{display:flex;flex-direction:column;gap:14px;align-items:flex-start;text-align:left}
 .ag-footer-line{margin:0;font-size:clamp(.92rem,2.7vw,1.08rem);line-height:1.8}
-.ag-footer-line [lang="ar"]{font-family:inherit;color:#fff;font-weight:700}
+.ag-footer-line [lang="ar"]{font-family:inherit;color:#fff!important;font-weight:700}
 @media(max-width:620px){.ag-canonical-footer{padding:34px 0}.ag-footer-inner{gap:12px}.ag-footer-line{font-size:.92rem}}
 </style>
 '''
@@ -52,13 +52,26 @@ jobs:
               if s!=old:
                   p.write_text(s,encoding='utf-8')
                   changed.append(str(p))
-          print('\n'.join(changed) if changed else 'No HTML changes required')
+
+          identity=Path('identity.css')
+          if identity.exists():
+              s=identity.read_text(encoding='utf-8',errors='ignore')
+              old=s
+              s=s.replace('.footer-wrap [lang="ar"]{color:#cbd5e1}', '.footer-wrap [lang="ar"]{color:#fff!important;font-weight:700}')
+              override='\n/* Final footer Arabic color override */\n.site-footer [lang="ar"],.ag-canonical-footer [lang="ar"]{color:#fff!important;font-weight:700}\n'
+              if 'Final footer Arabic color override' not in s:
+                  s += override
+              if s!=old:
+                  identity.write_text(s,encoding='utf-8')
+                  changed.append(str(identity))
+
+          print('\n'.join(changed) if changed else 'No changes required')
           PY
       - name: Commit site changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- '*.html'
+          git add -- '*.html' identity.css
           git diff --cached --quiet && exit 0
-          git commit -m "Use canonical AG footer on all homepage pages"
+          git commit -m "Make all Arabic footer text white"
           git push
