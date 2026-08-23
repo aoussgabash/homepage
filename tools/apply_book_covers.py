@@ -69,7 +69,7 @@ script = '''
 text = re.sub(r'\n?<script id="published-book-gallery-script">[\s\S]*?</script>\n?', '\n', text)
 text = text.replace('</body>', script + '</body>', 1)
 
-assert text.count('data-book-gallery') == 2
+assert text.count('<div class="published-book-gallery" data-book-gallery>') == 2
 assert 'assets/books/illumination-front.jpg' in text
 assert 'assets/books/illumination-back.jpg' in text
 assert 'assets/books/flexible-optimal-operations-front.jpg' in text
