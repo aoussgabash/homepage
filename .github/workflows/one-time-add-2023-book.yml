@@ -1,11 +1,9 @@
-# retrigger: 2026-08-23
 name: One-time add static 2023 book
 
 on:
   push:
     paths:
       - '.github/workflows/one-time-add-2023-book.yml'
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,19 +14,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Insert static 2023 book card
+      - name: Insert static 2023 card
         run: |
-          python - <<'PY'
+          python3 <<'PY'
           from pathlib import Path
 
           path = Path('index.html')
-          text = path.read_text(encoding='utf-8')
+          html = path.read_text(encoding='utf-8')
 
-          marker = '''          <article>
-            <span>In preparation | <span lang="ar" dir="rtl">قيد الإعداد</span></span>'''
+          if 'data-editorial-volume="2023"' not in html:
+              anchor = '<span>In preparation |'
+              anchor_position = html.find(anchor)
+              if anchor_position == -1:
+                  raise SystemExit('In preparation anchor not found')
 
-          if 'data-editorial-volume="2023"' not in text:
-              card = '''          <article class="published-book-card published-book-unified" data-editorial-volume="2023">
+              article_position = html.rfind('<article', 0, anchor_position)
+              if article_position == -1:
+                  raise SystemExit('Article anchor not found')
+
+              card = '''<article class="published-book-card published-book-unified" data-editorial-volume="2023">
             <div class="published-book-gallery">
               <div class="published-book-frame">
                 <img src="assets/books/selection-c3-front.jpg" alt="Front cover of Energy Optimization for Sustainable Resilience and Climate Stability – C+++ Framework | الغلاف الأمامي لمجموعة تحسين الطاقة من أجل المرونة المستدامة والاستقرار المناخي" loading="lazy" decoding="async">
@@ -52,27 +56,22 @@ jobs:
               <a class="button primary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Explore Digital Library | استكشف المكتبة الرقمية</a>
             </div>
           </article>
+          '''
 
-'''
-              if marker not in text:
-                  raise SystemExit('Insertion marker not found')
-              text = text.replace(marker, card + marker, 1)
-
-          path.write_text(text, encoding='utf-8')
+              html = html[:article_position] + card + html[article_position:]
+              path.write_text(html, encoding='utf-8')
           PY
 
-      - name: Verify static card
+      - name: Verify result
         run: |
           grep -q 'data-editorial-volume="2023"' index.html
           grep -q 'selection-c3-front.jpg' index.html
           ! grep -q 'featured-editorial.js' index.html
           ! grep -q 'published-book-toggle' index.html
 
-      - name: Remove this one-time workflow
-        run: rm -f .github/workflows/one-time-add-2023-book.yml
-
-      - name: Commit static book card
+      - name: Remove temporary workflow and commit
         run: |
+          rm -f .github/workflows/one-time-add-2023-book.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html .github/workflows/one-time-add-2023-book.yml
