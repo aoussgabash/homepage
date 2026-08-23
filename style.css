@@ -51,6 +51,7 @@ img{max-width:100%;display:block}
 .hero-card ul{margin:0;padding-left:20px;color:#dbeafe}
 .hero-card li+li{margin-top:10px}
 .card-kicker{color:#7dd3fc;font-size:.8rem;text-transform:uppercase;letter-spacing:.15em;font-weight:700}
+.hero-card .card-kicker [lang="ar"]{color:#fff}
 .section{padding:82px 0}
 .section h2{margin:0;font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.035em;line-height:1.08}
 .split{display:grid;grid-template-columns:.72fr 1.28fr;gap:56px;align-items:start}
