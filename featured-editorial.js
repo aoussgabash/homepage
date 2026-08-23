@@ -67,6 +67,10 @@
   if (lastPublishedCard) lastPublishedCard.insertAdjacentElement('afterend', card);
   else bookList.prepend(card);
 
+  bookList.querySelectorAll('.published-book-card .published-book-action .button').forEach((link) => {
+    link.textContent = 'Explore Digital Library | استكشف المكتبة الرقمية';
+  });
+
   const firstUpcoming = card.nextElementSibling;
   if (firstUpcoming) {
     const divider = document.createElement('div');
