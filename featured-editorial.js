@@ -7,6 +7,92 @@
   const bookList = booksSection.querySelector('.book-list');
   if (!bookList) return;
 
+  /* Apply one stronger visual frame to the three published works. */
+  const unifiedStyles = document.createElement('style');
+  unifiedStyles.id = 'ag-published-books-final-unification';
+  unifiedStyles.textContent = `
+    #books .book-list{align-items:stretch}
+    #books .published-book-unified{
+      position:relative;
+      overflow:hidden;
+      padding:28px;
+      border:1px solid rgba(14,116,144,.34)!important;
+      border-top:4px solid #0f4c75!important;
+      border-radius:20px!important;
+      background:linear-gradient(155deg,#ffffff 0%,#f1f8fc 58%,#e7f3fa 100%)!important;
+      box-shadow:0 20px 48px rgba(15,76,117,.15)!important;
+    }
+    #books .published-book-unified::before{
+      content:"";
+      position:absolute;
+      inset:0 0 auto;
+      height:110px;
+      pointer-events:none;
+      background:linear-gradient(180deg,rgba(56,189,248,.08),transparent);
+    }
+    #books .published-book-unified>*{position:relative;z-index:1}
+    #books .published-book-frame{
+      border:1px solid rgba(15,76,117,.18);
+      background:#fff;
+      box-shadow:0 16px 36px rgba(15,76,117,.18);
+    }
+    #books .published-book-frame img{background:#fff}
+    #books .published-book-toggle{
+      border-color:#0f4c75;
+      background:#0f4c75;
+      color:#fff;
+      box-shadow:0 8px 20px rgba(15,76,117,.18);
+      transition:transform .18s ease,background .18s ease,box-shadow .18s ease;
+    }
+    #books .published-book-toggle:hover,
+    #books .published-book-toggle:focus-visible{
+      transform:translateY(-1px);
+      background:#0b3d5d;
+      color:#fff;
+      box-shadow:0 12px 25px rgba(15,76,117,.25);
+    }
+    #books .published-book-unified>span{
+      color:#075985;
+      font-size:.76rem;
+      line-height:1.7;
+    }
+    #books .published-book-unified h3{
+      color:#0f2940;
+      font-size:1.3rem;
+      line-height:1.42;
+    }
+    #books .published-book-unified .card-ar{
+      margin-top:8px;
+      color:#0369a1;
+      font-weight:600;
+      line-height:1.65;
+    }
+    #books .book-meta{
+      border-color:rgba(15,76,117,.2);
+      background:rgba(255,255,255,.82);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
+    }
+    #books .book-meta p,
+    #books .book-abstract p{
+      color:#46596b;
+    }
+    #books .book-abstract h4{
+      padding-bottom:8px;
+      border-bottom:1px solid rgba(15,76,117,.16);
+      color:#0f4c75;
+    }
+    #books .published-book-action .button{
+      border-radius:13px;
+      box-shadow:0 12px 28px rgba(37,99,235,.2);
+    }
+    #books [lang="ar"]{font-weight:400}
+    @media(max-width:680px){
+      #books .published-book-unified{padding:20px}
+      #books .published-book-unified h3{font-size:1.2rem}
+    }
+  `;
+  document.head.appendChild(unifiedStyles);
+
   const card = document.createElement('article');
   card.className = 'published-book-card published-book-unified';
   card.dataset.editorialVolume = '2023';
