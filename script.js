@@ -184,17 +184,6 @@ if (!document.querySelector('#hero-portrait-layout')) {
   document.head.appendChild(heroPortraitStyles);
 }
 
-const footerIdentity = document.querySelector('.site-footer .footer-wrap > span:first-child');
-if (footerIdentity && !footerIdentity.querySelector('.footer-name-ar')) {
-  const separator = document.createTextNode(' | ');
-  const arabicFooterName = document.createElement('span');
-  arabicFooterName.className = 'footer-name-ar';
-  arabicFooterName.lang = 'ar';
-  arabicFooterName.dir = 'rtl';
-  arabicFooterName.textContent = 'الدكتور المهندس أوس غباش';
-  footerIdentity.append(separator, arabicFooterName);
-}
-
 const aboutContent = document.querySelector('#about .split > div:last-child');
 if (aboutContent && !aboutContent.querySelector('.about-profile-links')) {
   const profileLinks = document.createElement('div');
