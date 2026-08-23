@@ -96,9 +96,11 @@ img{max-width:100%;display:block}
 
 /* Canonical AG footer: one identical visual source for all sites */
 .site-footer{margin-top:0!important;padding:42px 0!important;border-top:1px solid rgba(255,255,255,.10)!important;background:#06101c!important;color:#aebfd0!important;text-align:left!important}
-.site-footer .footer-wrap{width:min(1120px,calc(100% - 32px))!important;margin:auto!important;display:block!important;text-align:left!important;font-size:0!important}
-.site-footer .footer-wrap>*{display:none!important}
-.site-footer .footer-wrap::before{content:"© 2026 Dr.-Ing. Aouss Gabash | الدكتور المهندس أوس غباش\A\A AG Academic Ecosystem | منظومة AG الأكاديمية\A\A Germany | ألمانيا • Syria | سوريا";display:block;white-space:pre-line;color:#aebfd0;font-family:Arial,Tahoma,sans-serif;font-size:1rem;font-weight:400;line-height:1.8;unicode-bidi:plaintext}
+.site-footer .footer-wrap{width:min(1120px,calc(100% - 32px))!important;margin:auto!important;display:block!important;text-align:left!important;font-size:1rem!important}
+.site-footer .footer-wrap>*{display:block!important}
+.site-footer .footer-wrap>span+span{margin-top:14px}
+.site-footer .footer-wrap::before{content:none!important;display:none!important}
+.site-footer .footer-wrap>span:nth-child(2) [lang="ar"]{color:#fff!important;font-weight:700}
 
 @media (max-width:900px){.hero-grid,.split{grid-template-columns:1fr}.cards,.book-list{grid-template-columns:repeat(2,1fr)}.about-profile-links{grid-template-columns:1fr}.hero{padding-top:72px}}
-@media (max-width:680px){.site-nav{position:absolute;left:16px;right:16px;top:78px;display:none;flex-direction:column;align-items:stretch;gap:0;padding:12px;border-radius:16px;background:#0b1c31;border:1px solid rgba(255,255,255,.1);box-shadow:0 20px 40px rgba(0,0,0,.3)}.site-nav.open{display:flex}.site-nav a{padding:12px 10px}.menu-toggle{display:block}.cards,.book-list{grid-template-columns:1fr}.section{padding:62px 0}.contact-box{align-items:flex-start;flex-direction:column}.hero-card{padding:24px}.site-footer{padding:34px 0!important}.site-footer .footer-wrap::before{font-size:.92rem}}
+@media (max-width:680px){.site-nav{position:absolute;left:16px;right:16px;top:78px;display:none;flex-direction:column;align-items:stretch;gap:0;padding:12px;border-radius:16px;background:#0b1c31;border:1px solid rgba(255,255,255,.1);box-shadow:0 20px 40px rgba(0,0,0,.3)}.site-nav.open{display:flex}.site-nav a{padding:12px 10px}.menu-toggle{display:block}.cards,.book-list{grid-template-columns:1fr}.section{padding:62px 0}.contact-box{align-items:flex-start;flex-direction:column}.hero-card{padding:24px}.site-footer{padding:34px 0!important}.site-footer .footer-wrap{font-size:.92rem!important}}
