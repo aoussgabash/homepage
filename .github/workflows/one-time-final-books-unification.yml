@@ -1,0 +1,64 @@
+name: Final static books unification
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-final-books-unification.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  unify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Unify published book cards
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          library_url = 'https://archive.org/details/@aouss_gabash'
+          library_label = 'Explore Digital Library | استكشف المكتبة الرقمية'
+
+          # Unify all three published-book action links.
+          pattern = re.compile(
+              r'(<article class="published-book-card published-book-unified"(?: data-editorial-volume="2023")?>.*?'
+              r'<div class="published-book-action">\s*<a class="button primary" href=")[^"]+(" target="_blank" rel="noopener noreferrer">).*?(</a>\s*</div>)',
+              re.S,
+          )
+
+          def replace_action(match):
+              return match.group(1) + library_url + match.group(2) + library_label + match.group(3)
+
+          html, count = pattern.subn(replace_action, html)
+          if count != 3:
+              raise SystemExit(f'Expected 3 published book actions, updated {count}')
+
+          # Normalize spacing around the 2023 card and the following upcoming card.
+          html = html.replace('\n</article>\n<article>\n            <span>In preparation |', '\n          </article>\n\n          <article>\n            <span>In preparation |', 1)
+
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Verify final structure
+        run: |
+          test "$(grep -o 'Explore Digital Library | استكشف المكتبة الرقمية' index.html | wc -l)" -eq 3
+          test "$(grep -o 'https://archive.org/details/@aouss_gabash' index.html | wc -l)" -ge 4
+          grep -q 'data-editorial-volume="2023"' index.html
+          ! grep -q 'featured-editorial.js' index.html
+          ! grep -q 'published-book-toggle' index.html
+
+      - name: Remove workflow and commit
+        run: |
+          rm -f .github/workflows/one-time-final-books-unification.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html .github/workflows/one-time-final-books-unification.yml
+          git commit -m 'Unify all published book cards and digital library buttons'
+          git push
