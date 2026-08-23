@@ -12,14 +12,17 @@
 
 <style id="published-books-unified-style">
   .book-list .published-book-unified{display:flex;flex-direction:column;min-height:100%;border-color:rgba(56,189,248,.48)!important;background:linear-gradient(180deg,#fff,#f4faff)!important}
-  .published-book-cover{width:100%;aspect-ratio:3/2;margin-bottom:20px;border:2px dashed rgba(56,189,248,.45);border-radius:16px;background:linear-gradient(145deg,#eaf6ff,#f8fbff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#0f4c75;font-weight:800}
-  .published-book-cover span{font-size:1.05rem}.published-book-cover small{display:block;margin-top:6px;font-size:.9rem;font-weight:700;color:#35617d}
+  .published-book-gallery{margin-bottom:20px}
+  .published-book-frame{width:100%;aspect-ratio:4/5;border-radius:18px;background:#eef7ff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 14px 34px rgba(15,76,117,.14)}
+  .published-book-frame img{width:100%;height:100%;object-fit:contain;display:block;background:#fff}
+  .published-book-toggle{width:100%;margin-top:12px;min-height:48px;border:1px solid rgba(15,76,117,.28);border-radius:12px;background:#fff;color:#0f4c75;font-weight:800;cursor:pointer}
+  .published-book-toggle:hover,.published-book-toggle:focus-visible{background:#eaf6ff;outline:none}
   .published-book-unified>span{min-height:56px;display:flex;align-items:flex-start;flex-wrap:wrap}
   .published-book-unified h3{min-height:112px}
   .published-book-unified p{margin-top:12px}
   .published-book-unified .published-book-action{display:flex;margin-top:auto;padding-top:20px}
   .published-book-unified .published-book-action .button{width:100%;min-height:58px;display:flex;align-items:center;justify-content:center;text-align:center}
-  @media(max-width:680px){.published-book-unified h3{min-height:0}.published-book-unified>span{min-height:0}.published-book-unified .published-book-action .button{min-height:54px}}
+  @media(max-width:680px){.published-book-unified h3,.published-book-unified>span{min-height:0}.published-book-unified .published-book-action .button{min-height:54px}.published-book-frame{aspect-ratio:3/4}}
 </style>
 </head>
 <body>
@@ -534,9 +537,11 @@
         </h2>
         <div class="book-list">
           <article class="published-book-card published-book-unified">
-            <div class="published-book-cover" aria-label="Book cover placeholder | مكان غلاف الكتاب">
-              <span>Book Cover</span>
-              <small lang="ar" dir="rtl">مكان غلاف الكتاب</small>
+            <div class="published-book-gallery" data-book-gallery>
+              <div class="published-book-frame">
+                <img src="assets/books/illumination-front.jpg" data-front="assets/books/illumination-front.jpg" data-back="assets/books/illumination-back.jpg" data-side="front" alt="Front cover of Electrical Illumination Engineering | الغلاف الأمامي لكتاب هندسة الإنارة الكهربائية" loading="lazy" decoding="async">
+              </div>
+              <button class="published-book-toggle" type="button" data-book-toggle>View Back Cover | عرض الغلاف الخلفي</button>
             </div>
             <span>Published · Arabic · Second Edition · 2006 | <span lang="ar" dir="rtl">منشور · بالعربية · الطبعة الثانية · 2006</span></span>
             <h3>Electrical Illumination Engineering<span class="card-ar" lang="ar" dir="rtl">هندسة الإنارة الكهربائية</span></h3>
@@ -554,9 +559,11 @@
           </article>
 
           <article class="published-book-card published-book-unified">
-            <div class="published-book-cover" aria-label="Book cover placeholder | مكان غلاف الكتاب">
-              <span>Book Cover</span>
-              <small lang="ar" dir="rtl">مكان غلاف الكتاب</small>
+            <div class="published-book-gallery" data-book-gallery>
+              <div class="published-book-frame">
+                <img src="assets/books/flexible-optimal-operations-front.jpg" data-front="assets/books/flexible-optimal-operations-front.jpg" data-back="assets/books/flexible-optimal-operations-back.jpg" data-side="front" alt="Front cover of Flexible Optimal Operations of Energy Supply Networks | الغلاف الأمامي للكتاب الإنجليزي" loading="lazy" decoding="async">
+              </div>
+              <button class="published-book-toggle" type="button" data-book-toggle>View Back Cover | عرض الغلاف الخلفي</button>
             </div>
             <span>Published · English · 2014 | <span lang="ar" dir="rtl">منشور · بالإنجليزية · 2014</span></span>
             <h3>Flexible Optimal Operations of Energy Supply Networks<span class="card-ar" lang="ar" dir="rtl">التشغيل الأمثل المرن لشبكات إمداد الطاقة</span></h3>
@@ -618,5 +625,21 @@
   </footer>
 
   <script src="script.js?v=20260820-2"></script>
+
+<script id="published-book-gallery-script">
+  document.querySelectorAll('[data-book-gallery]').forEach((gallery) => {
+    const image = gallery.querySelector('img[data-front][data-back]');
+    const button = gallery.querySelector('[data-book-toggle]');
+    if (!image || !button) return;
+    button.addEventListener('click', () => {
+      const showingBack = image.dataset.side === 'back';
+      image.src = showingBack ? image.dataset.front : image.dataset.back;
+      image.dataset.side = showingBack ? 'front' : 'back';
+      button.textContent = showingBack
+        ? 'View Back Cover | عرض الغلاف الخلفي'
+        : 'View Front Cover | عرض الغلاف الأمامي';
+    });
+  });
+</script>
 </body>
 </html>
