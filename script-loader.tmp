@@ -1,0 +1,15 @@
+(() => {
+  'use strict';
+
+  const loadScript = (src, onload) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.defer = true;
+    if (onload) script.addEventListener('load', onload, { once: true });
+    document.head.appendChild(script);
+  };
+
+  loadScript('script-legacy.js?v=20260823-1', () => {
+    loadScript('featured-editorial.js?v=20260823-2');
+  });
+})();
