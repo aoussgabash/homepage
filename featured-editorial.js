@@ -1,23 +1,11 @@
 (() => {
   'use strict';
 
-  const booksSection = document.querySelector('#books');
-  const bookList = booksSection?.querySelector('.book-list');
+  const bookList = document.querySelector('#books .book-list');
   if (!bookList) return;
 
   const libraryLabel = 'Explore Digital Library | استكشف المكتبة الرقمية';
   const libraryUrl = 'https://archive.org/details/@aouss_gabash';
-
-  const unifyLibraryButtons = () => {
-    bookList.querySelectorAll('.published-book-card .published-book-action .button').forEach((link) => {
-      link.textContent = libraryLabel;
-      link.href = libraryUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.className = 'button primary';
-      link.setAttribute('aria-label', libraryLabel);
-    });
-  };
 
   if (!document.querySelector('#ag-published-books-final-unification')) {
     const styles = document.createElement('style');
@@ -54,7 +42,7 @@
     card.dataset.editorialVolume = '2023';
     card.innerHTML = `
       <div class="published-book-gallery" data-book-gallery>
-        <div class="published-book-frame"><img src="assets/books/selection-c3-front.jpg" data-front="assets/books/selection-c3-front.jpg" data-back="assets/books/selection-c3-back.jpg" data-side="front" alt="Front cover of Energy Optimization for Sustainable Resilience and Climate Stability – C+++ Framework" loading="lazy" decoding="async"></div>
+        <div class="published-book-frame"><img src="assets/books/selection-c3-front.jpg" data-front="assets/books/selection-c3-front.jpg" data-back="assets/books/selection-c3-back.jpg" data-side="front" alt="Front cover of Energy Optimization for Sustainable Resilience and Climate Stability – C+++ Framework" loading="lazy" decoding="async" fetchpriority="low"></div>
         <button class="published-book-toggle" type="button" data-book-toggle>View Back Cover | عرض الغلاف الخلفي</button>
       </div>
       <span>Published · English · Editorial Collection · 2023 | <span lang="ar" dir="rtl">منشور · بالإنجليزية · مجموعة تحريرية · 2023</span></span>
@@ -79,6 +67,15 @@
     else bookList.prepend(card);
   }
 
+  bookList.querySelectorAll('.published-book-card .published-book-action .button').forEach((link) => {
+    link.textContent = libraryLabel;
+    link.href = libraryUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.className = 'button primary';
+    link.setAttribute('aria-label', libraryLabel);
+  });
+
   if (!bookList.querySelector('.upcoming-books-divider')) {
     const firstUpcoming = card.nextElementSibling;
     if (firstUpcoming) {
@@ -86,6 +83,7 @@
       divider.className = 'upcoming-books-divider';
       divider.innerHTML = '<strong>Upcoming Titles<span lang="ar" dir="rtl">الكتب القادمة</span></strong>';
       firstUpcoming.insertAdjacentElement('beforebegin', divider);
+
       let current = divider.nextElementSibling;
       while (current) {
         if (current.tagName === 'ARTICLE') current.classList.add('upcoming-book-card');
@@ -93,13 +91,6 @@
       }
     }
   }
-
-  unifyLibraryButtons();
-  requestAnimationFrame(unifyLibraryButtons);
-  window.addEventListener('pageshow', unifyLibraryButtons);
-
-  const observer = new MutationObserver(unifyLibraryButtons);
-  observer.observe(bookList, { childList: true, subtree: true });
 
   const image = card.querySelector('img[data-front][data-back]');
   const toggle = card.querySelector('[data-book-toggle]');
@@ -109,7 +100,9 @@
       const showingBack = image.dataset.side === 'back';
       image.src = showingBack ? image.dataset.front : image.dataset.back;
       image.dataset.side = showingBack ? 'front' : 'back';
-      toggle.textContent = showingBack ? 'View Back Cover | عرض الغلاف الخلفي' : 'View Front Cover | عرض الغلاف الأمامي';
+      toggle.textContent = showingBack
+        ? 'View Back Cover | عرض الغلاف الخلفي'
+        : 'View Front Cover | عرض الغلاف الأمامي';
     });
   }
 })();
