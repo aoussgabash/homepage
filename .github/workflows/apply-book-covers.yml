@@ -29,3 +29,5 @@ jobs:
           git add -A
           git commit -m "Display original front and back book covers"
           git push
+
+# Retriggered after correcting gallery validation.
