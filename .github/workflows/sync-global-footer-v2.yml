@@ -33,7 +33,7 @@ jobs:
 .ag-canonical-footer{background:#06101c;border-top:1px solid rgba(255,255,255,.1);padding:42px 0;color:#aebfd0}
 .ag-footer-inner{display:flex;flex-direction:column;gap:14px;align-items:flex-start;text-align:left}
 .ag-footer-line{margin:0;font-size:clamp(.92rem,2.7vw,1.08rem);line-height:1.8}
-.ag-footer-line [lang="ar"]{font-family:inherit}
+.ag-footer-line [lang="ar"]{font-family:inherit;color:#fff;font-weight:700}
 @media(max-width:620px){.ag-canonical-footer{padding:34px 0}.ag-footer-inner{gap:12px}.ag-footer-line{font-size:.92rem}}
 </style>
 '''
