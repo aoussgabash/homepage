@@ -1,0 +1,44 @@
+name: Fix 2014 book publisher
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-fix-2014-publisher.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Correct publisher
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          old = '<p><strong>Publisher | الناشر:</strong> LAP LAMBERT Academic Publishing | دار LAP LAMBERT للنشر الأكاديمي</p>'
+          new = '<p><strong>Publisher | الناشر:</strong> Südwestdeutscher Verlag für Hochschulschriften | دار النشر الألمانية الجنوبية الغربية للرسائل الجامعية</p>'
+
+          if old not in html:
+              raise SystemExit('Old publisher text not found')
+
+          html = html.replace(old, new, 1)
+          path.write_text(html, encoding='utf-8')
+          PY
+
+      - name: Verify and commit
+        run: |
+          grep -q 'Südwestdeutscher Verlag für Hochschulschriften' index.html
+          ! grep -q 'LAP LAMBERT Academic Publishing' index.html
+          rm -f .github/workflows/one-time-fix-2014-publisher.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html .github/workflows/one-time-fix-2014-publisher.yml
+          git commit -m 'Correct publisher for 2014 book'
+          git push
