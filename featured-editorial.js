@@ -79,13 +79,15 @@
       if (!image.dataset.side) image.dataset.side = 'front';
     }
 
-    const toggle = card.querySelector('[data-book-toggle]');
-    if (toggle) {
-      toggle.classList.add('published-book-toggle');
-      toggle.type = 'button';
-      toggle.textContent = image?.dataset.side === 'back'
+    const oldToggle = card.querySelector('[data-book-toggle]');
+    if (oldToggle) {
+      const cleanToggle = oldToggle.cloneNode(true);
+      cleanToggle.classList.add('published-book-toggle');
+      cleanToggle.type = 'button';
+      cleanToggle.textContent = image?.dataset.side === 'back'
         ? 'View Front Cover | عرض الغلاف الأمامي'
         : 'View Back Cover | عرض الغلاف الخلفي';
+      oldToggle.replaceWith(cleanToggle);
     }
 
     const link = card.querySelector('.published-book-action .button');
@@ -115,22 +117,19 @@
     }
   }
 
-  if (!bookList.dataset.galleryDelegated) {
-    bookList.dataset.galleryDelegated = 'true';
-    bookList.addEventListener('click', (event) => {
-      const toggle = event.target.closest('[data-book-toggle]');
-      if (!toggle || !bookList.contains(toggle)) return;
+  bookList.addEventListener('click', (event) => {
+    const toggle = event.target.closest('[data-book-toggle]');
+    if (!toggle || !bookList.contains(toggle)) return;
 
-      const gallery = toggle.closest('[data-book-gallery]');
-      const image = gallery?.querySelector('img[data-front][data-back]');
-      if (!image) return;
+    const gallery = toggle.closest('[data-book-gallery]');
+    const image = gallery?.querySelector('img[data-front][data-back]');
+    if (!image) return;
 
-      const showingBack = image.dataset.side === 'back';
-      image.src = showingBack ? image.dataset.front : image.dataset.back;
-      image.dataset.side = showingBack ? 'front' : 'back';
-      toggle.textContent = showingBack
-        ? 'View Back Cover | عرض الغلاف الخلفي'
-        : 'View Front Cover | عرض الغلاف الأمامي';
-    });
-  }
+    const showingBack = image.dataset.side === 'back';
+    image.src = showingBack ? image.dataset.front : image.dataset.back;
+    image.dataset.side = showingBack ? 'front' : 'back';
+    toggle.textContent = showingBack
+      ? 'View Back Cover | عرض الغلاف الخلفي'
+      : 'View Front Cover | عرض الغلاف الأمامي';
+  }, { passive: true });
 })();
