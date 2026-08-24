@@ -178,7 +178,6 @@ if (!document.querySelector('#hero-portrait-layout')) {
     .hero-name-copy{min-width:0;width:100%}.hero-name-row h1{margin:0;max-width:620px;font-size:clamp(2.55rem,4.1vw,3.65rem);line-height:1.02;letter-spacing:-.035em}.hero-name-row .hero-name-ar{margin-top:.38em;max-width:100%;font-size:clamp(1.25rem,2vw,1.75rem);line-height:1.5}.hero-title{margin:26px 0 10px;padding-left:0;border-left:0}.hero-ar{padding-left:0}
     .project-card[data-project-link]{cursor:pointer}.project-card[data-project-link]:focus-visible{outline:3px solid #38bdf8;outline-offset:4px}
     .project-card.press-card-unified{background:linear-gradient(180deg,#0f3454,#0b2d4a)!important;border-color:rgba(56,189,248,.42)!important;box-shadow:0 18px 48px rgba(2,18,38,.22)!important}.project-card.press-card-unified:hover{border-color:rgba(56,189,248,.72)!important;box-shadow:0 22px 58px rgba(2,18,38,.3)!important}.project-card.press-card-unified .project-code{background:rgba(14,116,144,.34)!important}
-    .site-footer .site-information-link{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:#7dd3fc!important;text-decoration:none;font-weight:700}.site-footer .site-information-link:hover{color:#fff!important;text-decoration:underline}
     @media(max-width:900px){.hero-profile-photo{width:148px;height:148px}.hero-name-row h1{font-size:clamp(2.45rem,6.5vw,3.25rem)}}
     @media(max-width:680px){.brand-identity{min-width:46px}.brand-identity .brand-logo{width:46px;height:46px;border-radius:10px}.hero-name-row{gap:18px}.hero-profile-photo{width:118px;height:118px;border-width:4px;box-shadow:0 16px 38px rgba(2,8,23,.38),0 0 0 8px rgba(56,189,248,.08)}.hero-name-row h1{font-size:clamp(2.15rem,9vw,2.8rem);line-height:1.04}.hero-name-row .hero-name-ar{margin-top:.45em;font-size:clamp(1.08rem,5.2vw,1.45rem)}}
     @media(max-width:480px){.hero-profile-photo{width:102px;height:102px}.hero-name-row h1{font-size:clamp(1.85rem,9.5vw,2.35rem)}.hero-name-row .hero-name-ar{font-size:clamp(1rem,5vw,1.25rem)}}`;
@@ -251,11 +250,10 @@ makeProjectCardLink(
   'Open Gabash Academic Press | فتح دار غباش للنشر الأكاديمي'
 );
 
-const mainFooter = document.querySelector('.site-footer .footer-wrap');
-if (mainFooter && !mainFooter.querySelector('.site-information-link')) {
-  const legalLink = document.createElement('a');
-  legalLink.className = 'site-information-link';
-  legalLink.href = 'site-information.html';
-  legalLink.innerHTML = 'Site Information <span aria-hidden="true">|</span> <span lang="ar" dir="rtl">بيانات الموقع</span>';
-  mainFooter.appendChild(legalLink);
+if (!document.querySelector('script[data-ag-central-footer]')) {
+  const centralFooter = document.createElement('script');
+  centralFooter.src = 'https://aoussgabash.com/assets/shared/ag-footer.js?v=20260824-1';
+  centralFooter.defer = true;
+  centralFooter.dataset.agCentralFooter = 'true';
+  document.body.appendChild(centralFooter);
 }
