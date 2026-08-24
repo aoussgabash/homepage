@@ -2,7 +2,27 @@
   'use strict';
 
   const BASE = 'https://aoussgabash.com/assets/shared/';
-  const VERSION = '20260824-2';
+  const VERSION = '20260824-3';
+
+  const loadStyle = (href, marker) => new Promise((resolve, reject) => {
+    const existing = document.querySelector(`link[${marker}]`);
+    if (existing) {
+      if (existing.dataset.loaded === 'true' || existing.sheet) resolve();
+      else existing.addEventListener('load', resolve, { once: true });
+      return;
+    }
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.setAttribute(marker, 'true');
+    link.addEventListener('load', () => {
+      link.dataset.loaded = 'true';
+      resolve();
+    }, { once: true });
+    link.addEventListener('error', reject, { once: true });
+    document.head.appendChild(link);
+  });
 
   const loadScript = (src, marker) => new Promise((resolve, reject) => {
     const existing = document.querySelector(`script[${marker}]`);
@@ -26,6 +46,8 @@
 
   const start = async () => {
     try {
+      await loadStyle(`${BASE}ag-theme.css?v=${VERSION}`, 'data-ag-theme');
+
       if (!window.AG_CONFIG) {
         await loadScript(`${BASE}ag-config.js?v=${VERSION}`, 'data-ag-config');
       }
