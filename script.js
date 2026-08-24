@@ -250,10 +250,10 @@ makeProjectCardLink(
   'Open Gabash Academic Press | فتح دار غباش للنشر الأكاديمي'
 );
 
-if (!document.querySelector('script[data-ag-central-footer]')) {
-  const centralFooter = document.createElement('script');
-  centralFooter.src = 'https://aoussgabash.com/assets/shared/ag-footer.js?v=20260824-1';
-  centralFooter.defer = true;
-  centralFooter.dataset.agCentralFooter = 'true';
-  document.body.appendChild(centralFooter);
+if (!document.querySelector('script[data-ag-loader]')) {
+  const loader = document.createElement('script');
+  loader.src = 'https://aoussgabash.com/assets/shared/ag-loader.js?v=20260824-3';
+  loader.defer = true;
+  loader.dataset.agLoader = 'true';
+  document.body.appendChild(loader);
 }
