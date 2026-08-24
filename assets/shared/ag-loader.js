@@ -2,7 +2,7 @@
   'use strict';
 
   const BASE = 'https://aoussgabash.com/assets/shared/';
-  const VERSION = '20260824-1';
+  const VERSION = '20260824-2';
 
   const loadScript = (src, marker) => new Promise((resolve, reject) => {
     const existing = document.querySelector(`script[${marker}]`);
@@ -29,7 +29,11 @@
       if (!window.AG_CONFIG) {
         await loadScript(`${BASE}ag-config.js?v=${VERSION}`, 'data-ag-config');
       }
-      await loadScript(`${BASE}ag-footer.js?v=${VERSION}`, 'data-ag-central-footer');
+
+      await Promise.all([
+        loadScript(`${BASE}ag-header.js?v=${VERSION}`, 'data-ag-central-header'),
+        loadScript(`${BASE}ag-footer.js?v=${VERSION}`, 'data-ag-central-footer')
+      ]);
     } catch (error) {
       console.error('AG shared components could not be loaded:', error);
     }
