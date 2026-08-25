@@ -24,6 +24,34 @@
     wrapper.append(home, brand);
   };
 
+  const setupMobileMenuDismiss = () => {
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.site-nav');
+    if (!menuButton || !navigation || navigation.dataset.outsideDismissReady === 'true') return;
+
+    navigation.dataset.outsideDismissReady = 'true';
+
+    const closeMenu = () => {
+      if (!navigation.classList.contains('open')) return;
+      navigation.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation | فتح قائمة التنقل');
+    };
+
+    document.addEventListener('pointerdown', (event) => {
+      if (!navigation.classList.contains('open')) return;
+      if (navigation.contains(event.target) || menuButton.contains(event.target)) return;
+      closeMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+  };
+
   const enhance = () => {
     const config = window.AG_CONFIG;
     if (!config) return;
@@ -42,12 +70,14 @@
 
     document.querySelectorAll('header a[href="#contact"]').forEach((link) => {
       link.classList.add('ag-shared-contact-link');
-      link.innerHTML = '<span aria-hidden="true">✉</span><span>Contact <span aria-hidden="true">|</span> <span lang="ar" dir="rtl">التواصل</span></span>';
+      link.innerHTML = '<span>Contact <span aria-hidden="true">|</span> <span lang="ar" dir="rtl">التواصل</span></span>';
     });
 
     document.querySelectorAll('header a[href^="mailto:"]').forEach((link) => {
       link.href = `mailto:${config.contact.email}`;
     });
+
+    setupMobileMenuDismiss();
   };
 
   if (document.readyState === 'loading') {
