@@ -15,6 +15,18 @@
         gap:12px!important;
         min-width:0!important;
       }
+      header .navlinks a,
+      header .site-nav a{
+        color:#fff!important;
+      }
+      header .navlinks a:hover,
+      header .navlinks a:focus-visible,
+      header .site-nav a:hover,
+      header .site-nav a:focus-visible{
+        color:#fff!important;
+        background:rgba(56,189,248,.12)!important;
+        outline:none!important;
+      }
       header .ag-home-button{
         width:44px!important;
         height:44px!important;
