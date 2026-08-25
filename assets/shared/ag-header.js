@@ -52,6 +52,18 @@
     });
   };
 
+  const removeUnavailableIsbnRows = () => {
+    document.querySelectorAll('#books article').forEach((book) => {
+      const title = book.querySelector('h3')?.textContent || '';
+      if (!title.includes('Electrical Illumination Engineering')) return;
+
+      book.querySelectorAll('.book-meta p').forEach((row) => {
+        const text = row.textContent.replace(/\s+/g, ' ').trim();
+        if (/^ISBN-(10|13):/i.test(text)) row.remove();
+      });
+    });
+  };
+
   const enhance = () => {
     const config = window.AG_CONFIG;
     if (!config) return;
@@ -78,6 +90,7 @@
     });
 
     setupMobileMenuDismiss();
+    removeUnavailableIsbnRows();
   };
 
   if (document.readyState === 'loading') {
