@@ -69,11 +69,11 @@
         position:relative!important;
         isolation:isolate!important;
         overflow:hidden!important;
-        color:#fff!important;
-        border:1px solid rgba(253,230,138,.78)!important;
-        background:linear-gradient(90deg,#d49a1f 0%,#f4c542 26%,#19a7e8 68%,#2563eb 100%)!important;
-        box-shadow:0 16px 36px rgba(37,99,235,.30),0 8px 24px rgba(212,154,31,.24),inset 0 1px 0 rgba(255,255,255,.34)!important;
-        text-shadow:0 1px 2px rgba(4,12,24,.38)!important;
+        color:#f8fbff!important;
+        border:1px solid rgba(209,171,82,.54)!important;
+        background:linear-gradient(90deg,#9b742d 0%,#b88a32 22%,#376f9c 64%,#245888 100%)!important;
+        box-shadow:0 12px 28px rgba(3,20,38,.30),0 6px 18px rgba(155,116,45,.14),inset 0 1px 0 rgba(255,255,255,.12)!important;
+        text-shadow:0 1px 2px rgba(2,10,20,.42)!important;
         transition:transform .22s ease,box-shadow .22s ease,filter .22s ease!important;
       }
       .hero-actions .button.primary[href*="ai.aoussgabash.com"]::before{
@@ -81,15 +81,15 @@
         position:absolute;
         inset:0;
         z-index:-1;
-        background:linear-gradient(115deg,rgba(255,255,255,.20),transparent 34%,transparent 68%,rgba(255,255,255,.10));
+        background:linear-gradient(115deg,rgba(255,255,255,.08),transparent 36%,transparent 70%,rgba(255,255,255,.04));
         pointer-events:none;
       }
       .hero-actions .button.primary[href*="ai.aoussgabash.com"]:hover,
       .hero-actions .button.primary[href*="ai.aoussgabash.com"]:focus-visible{
-        transform:translateY(-3px)!important;
-        filter:saturate(1.08) brightness(1.04)!important;
-        border-color:#fde68a!important;
-        box-shadow:0 20px 44px rgba(37,99,235,.36),0 10px 28px rgba(212,154,31,.30),0 0 0 3px rgba(251,191,36,.10)!important;
+        transform:translateY(-2px)!important;
+        filter:saturate(1.03) brightness(1.03)!important;
+        border-color:rgba(226,194,112,.72)!important;
+        box-shadow:0 16px 34px rgba(3,20,38,.34),0 8px 22px rgba(155,116,45,.18),0 0 0 2px rgba(184,138,50,.08)!important;
         outline:none!important;
       }
 
