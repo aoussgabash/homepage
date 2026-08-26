@@ -64,6 +64,35 @@
         font-size:inherit!important;
         line-height:1!important;
       }
+
+      .hero-actions .button.primary[href*="ai.aoussgabash.com"]{
+        position:relative!important;
+        isolation:isolate!important;
+        overflow:hidden!important;
+        color:#fff!important;
+        border:1px solid rgba(253,230,138,.78)!important;
+        background:linear-gradient(90deg,#d49a1f 0%,#f4c542 26%,#19a7e8 68%,#2563eb 100%)!important;
+        box-shadow:0 16px 36px rgba(37,99,235,.30),0 8px 24px rgba(212,154,31,.24),inset 0 1px 0 rgba(255,255,255,.34)!important;
+        text-shadow:0 1px 2px rgba(4,12,24,.38)!important;
+        transition:transform .22s ease,box-shadow .22s ease,filter .22s ease!important;
+      }
+      .hero-actions .button.primary[href*="ai.aoussgabash.com"]::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        z-index:-1;
+        background:linear-gradient(115deg,rgba(255,255,255,.20),transparent 34%,transparent 68%,rgba(255,255,255,.10));
+        pointer-events:none;
+      }
+      .hero-actions .button.primary[href*="ai.aoussgabash.com"]:hover,
+      .hero-actions .button.primary[href*="ai.aoussgabash.com"]:focus-visible{
+        transform:translateY(-3px)!important;
+        filter:saturate(1.08) brightness(1.04)!important;
+        border-color:#fde68a!important;
+        box-shadow:0 20px 44px rgba(37,99,235,.36),0 10px 28px rgba(212,154,31,.30),0 0 0 3px rgba(251,191,36,.10)!important;
+        outline:none!important;
+      }
+
       @media(max-width:680px){
         header .ag-header-left{gap:9px!important}
         header .ag-home-button{
