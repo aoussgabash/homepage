@@ -44,6 +44,37 @@
     document.head.appendChild(script);
   });
 
+  const applyPageSpecificFixes = () => {
+    const page = location.pathname.split('/').pop()?.toLowerCase() || 'index.html';
+    if (page !== 'ai-solutions.html') return;
+
+    const style = document.createElement('style');
+    style.id = 'ag-ai-solutions-navigation-fix';
+    style.textContent = `
+      @media(max-width:620px){
+        body header .back{
+          min-width:48px!important;
+          width:48px!important;
+          max-width:48px!important;
+          min-height:48px!important;
+          height:48px!important;
+          max-height:48px!important;
+          flex:0 0 48px!important;
+          padding:0!important;
+          margin:0!important;
+          border-radius:14px!important;
+          box-sizing:border-box!important;
+        }
+        body header .back svg{
+          width:22px!important;
+          height:22px!important;
+        }
+      }
+    `;
+    document.getElementById(style.id)?.remove();
+    document.head.appendChild(style);
+  };
+
   const start = async () => {
     try {
       await loadStyle(`${BASE}ag-theme.css?v=${VERSION}`, 'data-ag-theme');
@@ -56,6 +87,8 @@
         loadScript(`${BASE}ag-header.js?v=${VERSION}`, 'data-ag-central-header'),
         loadScript(`${BASE}ag-footer.js?v=${VERSION}`, 'data-ag-central-footer')
       ]);
+
+      applyPageSpecificFixes();
     } catch (error) {
       console.error('AG shared components could not be loaded:', error);
     }
