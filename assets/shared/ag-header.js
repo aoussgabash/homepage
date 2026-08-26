@@ -186,12 +186,20 @@
     });
   };
 
+  const shortenAgaiButtonLabel = () => {
+    const button = document.querySelector('.hero-actions .button.primary[href*="ai.aoussgabash.com"]');
+    if (!button) return;
+    button.textContent = 'Open AGAI | افتح منصة AGAI';
+    button.setAttribute('aria-label', 'Open AGAI | افتح منصة AGAI');
+  };
+
   const enhance = () => {
     const config = window.AG_CONFIG;
     if (!config) return;
 
     ensureHomeButtonStyle();
     createHomeControl(config);
+    shortenAgaiButtonLabel();
 
     document.querySelectorAll('header a[href="#contact"]').forEach((link) => {
       link.classList.add('ag-shared-contact-link');
