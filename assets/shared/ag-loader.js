@@ -51,18 +51,18 @@
     const style = document.createElement('style');
     style.id = 'ag-ai-solutions-navigation-fix';
     style.textContent = `
-      @media(max-width:620px){
+      @media(max-width:680px){
         body header .back{
-          min-width:48px!important;
-          width:48px!important;
-          max-width:48px!important;
-          min-height:48px!important;
-          height:48px!important;
-          max-height:48px!important;
-          flex:0 0 48px!important;
+          min-width:42px!important;
+          width:42px!important;
+          max-width:42px!important;
+          min-height:42px!important;
+          height:42px!important;
+          max-height:42px!important;
+          flex:0 0 42px!important;
           padding:0!important;
           margin:0!important;
-          border-radius:14px!important;
+          border-radius:13px!important;
           box-sizing:border-box!important;
         }
         body header .back svg{
