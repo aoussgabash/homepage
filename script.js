@@ -204,6 +204,18 @@ document.querySelectorAll('#books h3').forEach((heading) => {
   });
 });
 
+const advancedEnglishHeading = [...document.querySelectorAll('#credentials .compact-timeline h4')]
+  .find((heading) => [...heading.childNodes].some((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim() === 'Advanced English'));
+if (advancedEnglishHeading) {
+  advancedEnglishHeading.childNodes.forEach((node) => {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('Advanced English')) {
+      node.textContent = node.textContent.replace('Advanced English', 'Advanced English for Master’s Students');
+    }
+  });
+  const arabicHeading = advancedEnglishHeading.querySelector('.card-ar');
+  if (arabicHeading) arabicHeading.textContent = 'اللغة الإنجليزية المتقدمة لطلبة الماجستير';
+}
+
 const projectCards = [...document.querySelectorAll('#projects .project-card')];
 
 const researchProjectCard = projectCards.find((card) => card.querySelector('.project-code .suffix')?.textContent.trim() === 'RS');
