@@ -1,0 +1,54 @@
+name: Update AGPR Arabic Description
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/update-agpr-arabic-optimization.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-arabic-description:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace Arabic automation with optimization
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+          marker = '<h3>Gabash Academic Press<span class="card-ar" lang="ar" dir="rtl">دار غباش للنشر الأكاديمي</span></h3>'
+          start = text.find(marker)
+          if start == -1:
+              raise SystemExit("Gabash Academic Press card not found")
+
+          end = text.find("</article>", start)
+          if end == -1:
+              raise SystemExit("Gabash Academic Press card end not found")
+
+          old = "كتب ومنشورات أكاديمية وتعليمية في الهندسة والطاقة والأتمتة والذكاء الاصطناعي."
+          new = "كتب ومنشورات أكاديمية وتعليمية في الهندسة والطاقة والتحسين والذكاء الاصطناعي."
+          card = text[start:end]
+
+          if old not in card:
+              raise SystemExit("Arabic AGPR description was not found")
+
+          card = card.replace(old, new, 1)
+          text = text[:start] + card + text[end:]
+          path.write_text(text, encoding="utf-8")
+
+      - name: Commit website update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/update-agpr-arabic-optimization.yml
+          git add index.html
+          git commit -m "Match AGPR Arabic description with optimization"
+          git push
