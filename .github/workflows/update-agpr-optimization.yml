@@ -1,0 +1,43 @@
+name: Update AGPR Description
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/update-agpr-optimization.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-description:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace automation with optimization
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+          old = "Academic books and educational publications in engineering, energy, automation, and artificial intelligence."
+          new = "Academic books and educational publications in engineering, energy, optimization, and artificial intelligence."
+
+          if old not in text:
+              raise SystemExit("Target AGPR description was not found")
+
+          text = text.replace(old, new, 1)
+          path.write_text(text, encoding="utf-8")
+
+      - name: Commit website update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/update-agpr-optimization.yml
+          git add index.html
+          git commit -m "Change AGPR description from automation to optimization"
+          git push
