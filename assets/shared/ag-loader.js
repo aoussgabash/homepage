@@ -2,7 +2,7 @@
   'use strict';
 
   const BASE = 'https://aoussgabash.com/assets/shared/';
-  const VERSION = '20260824-3';
+  const VERSION = '20260831-4';
 
   const loadStyle = (href, marker) => new Promise((resolve, reject) => {
     const existing = document.querySelector(`link[${marker}]`);
@@ -46,6 +46,43 @@
 
   const applyPageSpecificFixes = () => {
     const page = location.pathname.split('/').pop()?.toLowerCase() || 'index.html';
+
+    if (page === 'index.html') {
+      const style = document.createElement('style');
+      style.id = 'ag-inactive-project-cards';
+      style.textContent = `
+        body #projects .project-card:not(.featured),
+        body #projects .project-card.press-card-unified:not(.featured){
+          background:#14283f!important;
+          border-color:rgba(148,163,184,.18)!important;
+          box-shadow:none!important;
+        }
+        body #projects .project-card:not(.featured):hover,
+        body #projects .project-card.press-card-unified:not(.featured):hover{
+          transform:none!important;
+          background:#14283f!important;
+          border-color:rgba(148,163,184,.18)!important;
+          box-shadow:none!important;
+        }
+        body #projects .project-card:not(.featured) .project-icon{
+          background:rgba(56,189,248,.10)!important;
+          border-color:rgba(125,211,252,.14)!important;
+        }
+        body #projects .project-card:not(.featured) h3{
+          color:#ffffff!important;
+        }
+        body #projects .project-card:not(.featured) p,
+        body #projects .project-card:not(.featured) .ar-copy{
+          color:#cbd5e1!important;
+        }
+        body #projects .project-card:not(.featured) .status{
+          color:#94a3b8!important;
+        }
+      `;
+      document.getElementById(style.id)?.remove();
+      document.head.appendChild(style);
+    }
+
     if (page !== 'ai-solutions.html') return;
 
     const style = document.createElement('style');
