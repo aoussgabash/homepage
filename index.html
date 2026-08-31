@@ -673,6 +673,24 @@
   </div>
 </footer>
 
-  <script src="script.js?v=20260820-2"></script>
+  <script src="script.js?v=20260831-2"></script>
+<script id="agpr-coming-next-fix">
+(() => {
+  const cards = [...document.querySelectorAll('#projects .project-card')];
+  const card = cards.find((item) => item.querySelector('.project-code .suffix')?.textContent.trim() === 'PR');
+  if (!card) return;
+  const label = card.querySelector('.card-link, .status');
+  if (label) {
+    label.className = 'status';
+    label.innerHTML = 'Coming next | <span lang="ar" dir="rtl">قريباً</span>';
+  }
+  card.style.cursor = 'default';
+  card.style.pointerEvents = 'none';
+  card.removeAttribute('role');
+  card.removeAttribute('tabindex');
+  card.removeAttribute('aria-label');
+  delete card.dataset.projectLink;
+})();
+</script>
 </body>
 </html>
