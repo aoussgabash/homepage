@@ -1,0 +1,54 @@
+name: Update AGPR Coming Next Label
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-agpr-coming-next.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Change Gabash Academic Press status label
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          old = '<span class="status">In development | <span lang="ar" dir="rtl">قيد التطوير</span></span>'
+          new = '<span class="status">Coming next | <span lang="ar" dir="rtl">قريباً</span></span>'
+
+          marker = '<h3>Gabash Academic Press<span class="card-ar" lang="ar" dir="rtl">دار غباش للنشر الأكاديمي</span></h3>'
+          start = text.find(marker)
+          if start == -1:
+              raise SystemExit('Gabash Academic Press card not found')
+
+          end = text.find('</article>', start)
+          if end == -1:
+              raise SystemExit('Gabash Academic Press card end not found')
+
+          card = text[start:end]
+          if old not in card:
+              raise SystemExit('Current AGPR status label not found')
+
+          card = card.replace(old, new, 1)
+          text = text[:start] + card + text[end:]
+          path.write_text(text, encoding='utf-8')
+
+      - name: Commit website update and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm .github/workflows/update-agpr-coming-next.yml
+          git add index.html .github/workflows/update-agpr-coming-next.yml
+          git commit -m "Change AGPR status to Coming next"
+          git push
