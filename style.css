@@ -44,7 +44,7 @@ img{max-width:100%;display:block}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:14px;font-weight:700;text-decoration:none;transition:.2s ease}
 .button:hover{transform:translateY(-2px)}
-.button.primary{background:linear-gradient(135deg,#38bdf8,#2563eb);color:#fff;box-shadow:0 14px 30px rgba(37,99,235,.28)}
+.button.primary{color:#fff}
 .button.secondary{border:1px solid rgba(255,255,255,.22);color:#fff;background:rgba(255,255,255,.05)}
 .hero-card{padding:30px;border-radius:var(--radius);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);box-shadow:0 26px 60px rgba(0,0,0,.24)}
 .hero-card h2{margin:8px 0 18px;font-size:1.65rem;line-height:1.25}
