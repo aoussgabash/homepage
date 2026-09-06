@@ -45,6 +45,8 @@ img{max-width:100%;display:block}
 .button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:14px;font-weight:700;text-decoration:none;transition:.2s ease}
 .button:hover{transform:translateY(-2px)}
 .button.primary{color:#fff}
+/* Keep the AGAI hero button in its final gold-to-blue appearance from first paint, preventing the temporary blue flash while later CSS/JS loads. */
+.hero-actions .button.primary{background:linear-gradient(90deg,rgb(145,117,62) 0%,rgb(110,113,97) 48%,rgb(48,84,114) 100%)!important;box-shadow:0 16px 34px rgba(2,18,38,.24),inset 0 1px 0 rgba(255,255,255,.18)!important}
 .button.secondary{border:1px solid rgba(255,255,255,.22);color:#fff;background:rgba(255,255,255,.05)}
 .hero-card{padding:30px;border-radius:var(--radius);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);box-shadow:0 26px 60px rgba(0,0,0,.24)}
 .hero-card h2{margin:8px 0 18px;font-size:1.65rem;line-height:1.25}
