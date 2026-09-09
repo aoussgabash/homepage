@@ -93,6 +93,9 @@ img{max-width:100%;display:block}
 .contact-box{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:34px;border-radius:22px;background:#eff8ff;border:1px solid #cfe8f8}
 .contact-box p{margin-bottom:0;color:#475569}
 .contact-box .button{flex:0 0 auto}
+/* Ensure the contact email is clearly visible on the light contact card. */
+.contact-box .button.primary{background:linear-gradient(135deg,#0f4c75,#0369a1)!important;color:#fff!important;border:1px solid rgba(3,105,161,.35);box-shadow:0 10px 24px rgba(15,76,117,.22)}
+.contact-box .button.primary:hover{background:linear-gradient(135deg,#0c3f62,#075985)!important;box-shadow:0 14px 30px rgba(15,76,117,.28)}
 .site-footer{background:#050c16;color:#94a3b8;padding:28px 0}
 .footer-wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.9rem}
 
