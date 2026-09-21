@@ -96,9 +96,6 @@ img{max-width:100%;display:block}
 /* Ensure the contact email is clearly visible on the light contact card. */
 .contact-box .button.primary{background:linear-gradient(135deg,#0f4c75,#0369a1)!important;color:#fff!important;border:1px solid rgba(3,105,161,.35);box-shadow:0 10px 24px rgba(15,76,117,.22)}
 .contact-box .button.primary:hover{background:linear-gradient(135deg,#0c3f62,#075985)!important;box-shadow:0 14px 30px rgba(15,76,117,.28)}
-.site-footer{background:#050c16;color:#94a3b8;padding:28px 0}
-.footer-wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:.9rem}
-
 /* Canonical AG footer: one identical visual source for all sites */
 .site-footer{margin-top:0!important;padding:42px 0!important;border-top:1px solid rgba(255,255,255,.10)!important;background:#06101c!important;color:#aebfd0!important;text-align:left!important}
 .site-footer .footer-wrap{width:min(1120px,calc(100% - 32px))!important;margin:auto!important;display:block!important;text-align:left!important;font-size:1rem!important}
