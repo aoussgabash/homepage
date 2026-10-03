@@ -56,7 +56,7 @@ if (!document.querySelector('#ag-website-schema')) {
         name: 'Dr.-Ing. Aouss Gabash',
         alternateName: 'أوس غباش',
         url: SITE_URL,
-        image: 'https://avatars.githubusercontent.com/u/312260129?v=4&s=400',
+        image: 'https://aoussgabash.com/assets/brand/AG.jpg',
         jobTitle: 'Electrical Power Systems Researcher, Educator and Author',
         sameAs: [
           'https://orcid.org/0000-0002-3720-7203',
@@ -155,7 +155,7 @@ if (heroName) {
     heroNameRow.className = 'hero-name-row';
     const heroPhoto = document.createElement('img');
     heroPhoto.className = 'hero-profile-photo';
-    heroPhoto.src = 'https://avatars.githubusercontent.com/u/312260129?v=4&s=400';
+    heroPhoto.src = 'https://aoussgabash.com/assets/brand/AG.jpg';
     heroPhoto.alt = 'Portrait of Dr.-Ing. Aouss Gabash | صورة الدكتور المهندس أوس غباش';
     heroPhoto.width = 174;
     heroPhoto.height = 174;
