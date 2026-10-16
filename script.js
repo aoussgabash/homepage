@@ -155,12 +155,19 @@ if (heroName) {
     heroNameRow.className = 'hero-name-row';
     const heroPhoto = document.createElement('img');
     heroPhoto.className = 'hero-profile-photo';
-    heroPhoto.src = 'https://aoussgabash.com/assets/brand/AG.jpg';
+    // Reserve the portrait space without painting alt text while it loads.
+    heroPhoto.style.opacity = '0';
+    const revealPortrait = () => { heroPhoto.style.opacity = '1'; };
+    heroPhoto.addEventListener('load', revealPortrait, { once: true });
+    // Keep the accessible description visible if the image genuinely fails.
+    heroPhoto.addEventListener('error', revealPortrait, { once: true });
     heroPhoto.alt = 'Portrait of Dr.-Ing. Aouss Gabash | صورة الدكتور المهندس أوس غباش';
     heroPhoto.width = 174;
     heroPhoto.height = 174;
     heroPhoto.loading = 'eager';
     heroPhoto.fetchPriority = 'high';
+    heroPhoto.src = 'https://aoussgabash.com/assets/brand/AG.jpg';
+    if (heroPhoto.complete && heroPhoto.naturalWidth > 0) revealPortrait();
     const heroNameCopy = document.createElement('div');
     heroNameCopy.className = 'hero-name-copy';
     heroName.before(heroNameRow);
