@@ -38,7 +38,10 @@
 .ieee-initiative-badge a:focus-visible{outline:2px solid #d5ad62;outline-offset:3px}
 .ieee-initiative-call{display:block;margin-top:5px;color:#f4d595;font-size:.78em;line-height:1.5;font-weight:600}
 /* Keep Arabic shaping natural and isolate Latin abbreviations in hero labels. */
-.hero bdi{unicode-bidi:isolate;letter-spacing:normal;text-transform:none}
+bdi{unicode-bidi:isolate;letter-spacing:normal;text-transform:none}
+[lang="ar"]{unicode-bidi:isolate;letter-spacing:normal;text-transform:none}
+.hero-actions .button{flex-wrap:wrap;column-gap:.3em;row-gap:.15em}
+.hero-actions .button>bdi{display:inline-block;max-width:100%}
 .hero .credential-row,.hero .hero-actions{direction:ltr}
 .hero [lang="ar"]{letter-spacing:normal;text-transform:none}
 </style>
@@ -88,7 +91,7 @@
             <span><bdi lang="en" dir="ltr">Author &amp; Publisher</bdi> | <bdi lang="ar" dir="rtl">مؤلف وناشر</bdi></span>
           </div>
           <div class="hero-actions">
-            <a class="button primary" href="https://ai.aoussgabash.com"><bdi lang="en" dir="ltr">Open AGAI Learning Platform</bdi> | <bdi lang="ar" dir="rtl">افتح منصة <bdi dir="ltr">AGAI</bdi> التعليمية</bdi></a>
+            <a class="button primary" href="https://ai.aoussgabash.com"><bdi lang="en" dir="ltr">Open AGAI</bdi> | <bdi lang="ar" dir="rtl">افتح منصة <bdi dir="ltr">AGAI</bdi></bdi></a>
             <a class="button secondary" href="#projects"><bdi lang="en" dir="ltr">Explore Projects</bdi> | <bdi lang="ar" dir="rtl">استكشف المشاريع</bdi></a>
           </div>
         </div>
@@ -106,7 +109,7 @@
             </li>
             <li>
               <span>A-R-OPF and Energy Storage Integration</span>
-              <span class="ar-line" lang="ar" dir="rtl">تدفق الاستطاعة الأمثل الفعالة–غير الفعالة (A-R-OPF) ودمج تخزين الطاقة</span>
+              <span class="ar-line" lang="ar" dir="rtl">تدفق الاستطاعة الأمثل الفعالة–غير الفعالة <bdi dir="ltr">(A-R-OPF)</bdi> ودمج تخزين الطاقة</span>
             </li>
             <li>
               <span>Fuzzy, Hybrid, and Intelligent Control Systems</span>
@@ -229,7 +232,7 @@
                 <div>
                   <h4>Agile Project Management Training<span class="card-ar" lang="ar" dir="rtl">تدريب متقدم في إدارة المشاريع الرشيقة</span></h4>
                   <p>Professional advanced training, alfatraining, Erfurt, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">تدريب مهني متقدم، alfatraining، إرفورت، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">تدريب مهني متقدم، <bdi dir="ltr">alfatraining</bdi>، إرفورت، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -237,7 +240,7 @@
                 <div>
                   <h4>Engineering Manager<span class="card-ar" lang="ar" dir="rtl">مدير هندسي</span></h4>
                   <p>Electricity and gas supply, Energy Networks Rudolstadt GmbH, Rudolstadt, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">شبكات إمداد الكهرباء والغاز، شركة Energy Networks Rudolstadt GmbH، رودولشتات، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">شبكات إمداد الكهرباء والغاز، شركة <bdi dir="ltr">Energy Networks Rudolstadt GmbH</bdi>، رودولشتات، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -245,7 +248,7 @@
                 <div>
                   <h4>Project Management Training<span class="card-ar" lang="ar" dir="rtl">تدريب في إدارة المشاريع</span></h4>
                   <p>Professional advanced training, alfatraining, Erfurt, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">تدريب مهني متقدم، alfatraining، إرفورت، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">تدريب مهني متقدم، <bdi dir="ltr">alfatraining</bdi>، إرفورت، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -269,7 +272,7 @@
                 <div>
                   <h4>Automation Systems Training<span class="card-ar" lang="ar" dir="rtl">تدريب في أنظمة الأتمتة</span></h4>
                   <p>SIMATIC S7, WinCC flexible and PROFIBUS/PROFINET, alfatraining, Erfurt, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">أنظمة SIMATIC S7 وWinCC flexible وشبكات PROFIBUS/PROFINET، alfatraining، إرفورت، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">أنظمة <bdi dir="ltr">SIMATIC S7</bdi> و<bdi dir="ltr">WinCC flexible</bdi> وشبكات <bdi dir="ltr">PROFIBUS/PROFINET</bdi>، <bdi dir="ltr">alfatraining</bdi>، إرفورت، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -321,7 +324,7 @@
                 <div>
                   <h4>Turkish Language<span class="card-ar" lang="ar" dir="rtl">اللغة التركية</span></h4>
                   <p>A1–B2 studies, Akdemistanbul, Istanbul, Turkey.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">دراسة المستويات A1–B2، Akdemistanbul، إسطنبول، تركيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">دراسة المستويات <bdi dir="ltr">A1–B2</bdi>، <bdi dir="ltr">Akdemistanbul</bdi>، إسطنبول، تركيا.</p>
                 </div>
               </article>
               <article>
@@ -329,7 +332,7 @@
                 <div>
                   <h4>Teaching in English<span class="card-ar" lang="ar" dir="rtl">التدريس باللغة الإنجليزية</span></h4>
                   <p>C1 professional course, London School of English, London, United Kingdom.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">دورة مهنية بالمستوى C1، London School of English، لندن، المملكة المتحدة.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">دورة مهنية بالمستوى <bdi dir="ltr">C1</bdi>، <bdi dir="ltr">London School of English</bdi>، لندن، المملكة المتحدة.</p>
                 </div>
               </article>
               <article>
@@ -337,7 +340,7 @@
                 <div>
                   <h4>Chinese for Beginners<span class="card-ar" lang="ar" dir="rtl">اللغة الصينية للمبتدئين</span></h4>
                   <p>A1 studies, TU Ilmenau / FH Erfurt, Ilmenau / Erfurt, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">دراسة المستوى A1، جامعة إلميناو التقنية / جامعة العلوم التطبيقية في إرفورت، إلميناو / إرفورت، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">دراسة المستوى <bdi dir="ltr">A1</bdi>، جامعة إلميناو التقنية / جامعة العلوم التطبيقية في إرفورت، إلميناو / إرفورت، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -353,7 +356,7 @@
                 <div>
                   <h4>Advanced German Phonetics<span class="card-ar" lang="ar" dir="rtl">الصوتيات المتقدمة في اللغة الألمانية</span></h4>
                   <p>C2 German Mix, VHS Ilmenau, Ilmenau, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">دورة German Mix بالمستوى C2، معهد تعليم الكبار VHS إلميناو، إلميناو، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">دورة <bdi dir="ltr">German Mix</bdi> بالمستوى <bdi dir="ltr">C2</bdi>، معهد تعليم الكبار <bdi dir="ltr">VHS</bdi> إلميناو، إلميناو، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -361,7 +364,7 @@
                 <div>
                   <h4>Advanced German for Specialists<span class="card-ar" lang="ar" dir="rtl">الألمانية المتقدمة للمتخصصين</span></h4>
                   <p>C1 language training for specialists and managers, Erfurt, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">تدريب لغوي بالمستوى C1 للمتخصصين والمديرين، إرفورت، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">تدريب لغوي بالمستوى <bdi dir="ltr">C1</bdi> للمتخصصين والمديرين، إرفورت، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -377,7 +380,7 @@
                 <div>
                   <h4>German for Doctoral Students<span class="card-ar" lang="ar" dir="rtl">الألمانية لطلبة الدكتوراه</span></h4>
                   <p>B2, TU Ilmenau, Ilmenau, Germany.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">المستوى B2، جامعة إلميناو التقنية، إلميناو، ألمانيا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">المستوى <bdi dir="ltr">B2</bdi>، جامعة إلميناو التقنية، إلميناو، ألمانيا.</p>
                 </div>
               </article>
               <article>
@@ -385,7 +388,7 @@
                 <div>
                   <h4>German Language<span class="card-ar" lang="ar" dir="rtl">اللغة الألمانية</span></h4>
                   <p>A1–B1, Aleppo University, Aleppo, Syria.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">المستويات A1–B1، جامعة حلب، حلب، سوريا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">المستويات <bdi dir="ltr">A1–B1</bdi>، جامعة حلب، حلب، سوريا.</p>
                 </div>
               </article>
               <article>
@@ -401,7 +404,7 @@
                 <div>
                   <h4>Advanced English<span class="card-ar" lang="ar" dir="rtl">اللغة الإنجليزية المتقدمة</span></h4>
                   <p>B2 course for master’s students, Aleppo University, Aleppo, Syria.</p>
-                  <p class="ar-copy" lang="ar" dir="rtl">دورة بالمستوى B2 لطلبة الماجستير، جامعة حلب، حلب، سوريا.</p>
+                  <p class="ar-copy" lang="ar" dir="rtl">دورة بالمستوى <bdi dir="ltr">B2</bdi> لطلبة الماجستير، جامعة حلب، حلب، سوريا.</p>
                 </div>
               </article>
               <article>
@@ -429,9 +432,9 @@
             <p class="section-label">Professional Service | <span lang="ar" dir="rtl">الخدمة المهنية</span></p>
             <h3>Memberships and peer review<span class="card-ar" lang="ar" dir="rtl">العضويات والتحكيم العلمي</span></h3>
             <p><strong>IEEE Senior Member</strong> and scientific reviewer with more than 15 years of professional service; <strong>VDE member</strong> with 4 years of service.</p>
-            <p class="ar-copy" lang="ar" dir="rtl"><strong>عضو أقدم في IEEE</strong> ومحكّم علمي بخبرة مهنية تتجاوز 15 عاماً، و<strong>عضو في VDE</strong> لمدة 4 سنوات.</p>
+            <p class="ar-copy" lang="ar" dir="rtl"><strong>عضو أقدم في <bdi dir="ltr">IEEE</bdi></strong> ومحكّم علمي بخبرة مهنية تتجاوز 15 عاماً، و<strong>عضو في <bdi dir="ltr">VDE</bdi></strong> لمدة 4 سنوات.</p>
             <p class="detail-small">Reviewer for leading IEEE, IET, Elsevier and MDPI journals in power systems, smart grids, renewable energy, control, sustainability and AI applications in electrical power systems.</p>
-            <p class="detail-small ar-copy" lang="ar" dir="rtl">محكّم في دوريات علمية رائدة تابعة لـ IEEE وIET وElsevier وMDPI في أنظمة الطاقة والشبكات الذكية والطاقة المتجددة والتحكم والاستدامة وتطبيقات الذكاء الاصطناعي في أنظمة الطاقة الكهربائية.</p>
+            <p class="detail-small ar-copy" lang="ar" dir="rtl">محكّم في دوريات علمية رائدة تابعة لـ <bdi dir="ltr">IEEE</bdi> و<bdi dir="ltr">IET</bdi> و<bdi dir="ltr">Elsevier</bdi> و<bdi dir="ltr">MDPI</bdi> في أنظمة الطاقة والشبكات الذكية والطاقة المتجددة والتحكم والاستدامة وتطبيقات الذكاء الاصطناعي في أنظمة الطاقة الكهربائية.</p>
           </article>
 
           <article class="detail-card">
@@ -485,7 +488,7 @@
             <span class="project-icon"><span class="project-code"><span class="ag">AG</span><span class="suffix">AI</span></span></span>
             <h3>AI Learning Platform<span class="card-ar" lang="ar" dir="rtl">منصة تعلم الذكاء الاصطناعي</span></h3>
             <p>Bilingual lectures, laboratories, quizzes, and downloadable academic PDFs in AI applications for electrical power systems.</p>
-            <p class="ar-copy" lang="ar" dir="rtl">محاضرات ومخابر واختبارات وملفات PDF أكاديمية قابلة للتنزيل في تطبيقات الذكاء الاصطناعي لأنظمة الطاقة الكهربائية.</p>
+            <p class="ar-copy" lang="ar" dir="rtl">محاضرات ومخابر واختبارات وملفات <bdi dir="ltr">PDF</bdi> أكاديمية قابلة للتنزيل في تطبيقات الذكاء الاصطناعي لأنظمة الطاقة الكهربائية.</p>
             <span class="card-link">Visit platform → | <span lang="ar" dir="rtl">زيارة المنصة ←</span></span>
           </a>
 
@@ -619,18 +622,18 @@
     </div>
   </div>
   <span>Published · English · Editorial Collection · 2023 | <span lang="ar" dir="rtl">منشور · بالإنجليزية · مجموعة تحريرية · 2023</span></span>
-  <h3>Energy Optimization for Sustainable Resilience and Climate Stability – C+++ Framework<span class="card-ar" lang="ar" dir="rtl">تحسين الطاقة من أجل المرونة المستدامة والاستقرار المناخي – إطار C+++</span></h3>
+  <h3>Energy Optimization for Sustainable Resilience and Climate Stability – C+++ Framework<span class="card-ar" lang="ar" dir="rtl">تحسين الطاقة من أجل المرونة المستدامة والاستقرار المناخي – إطار <bdi dir="ltr">C+++</bdi></span></h3>
   <div class="book-meta">
     <p><strong>Editor and Compiler | المحرر والمُعِدّ:</strong> Dr.-Ing. Aouss Gabash | الدكتور المهندس أوس غباش</p>
     <p><strong>Publisher | الناشر:</strong> MDPI</p>
     <p><strong>Publication Year | سنة النشر:</strong> 2023</p>
-    <p><strong>Type | النوع:</strong> MDPI Selections · Editorial Collection | مختارات MDPI · مجموعة تحريرية</p>
+    <p><strong>Type | النوع:</strong> MDPI Selections · Editorial Collection | <bdi lang="ar" dir="rtl">مختارات <bdi dir="ltr">MDPI</bdi> · مجموعة تحريرية</bdi></p>
     <p><strong>Language | اللغة:</strong> English | الإنجليزية</p>
   </div>
   <div class="book-abstract">
     <h4>Abstract | <span lang="ar" dir="rtl">الملخص</span></h4>
     <p>This editorial preface presents the scientific vision of the collection by tracing the evolution of sustainable energy systems and highlighting renewable-energy integration, battery storage, real-time optimal power flow, and the proposed C+++ Framework.</p>
-    <p class="ar-copy" lang="ar" dir="rtl">تقدم هذه المقدمة التحريرية الرؤية العلمية للمجموعة من خلال تتبع تطور أنظمة الطاقة المستدامة، وإبراز دمج مصادر الطاقة المتجددة، وتخزين الطاقة، وتدفق الاستطاعة الأمثل الآني، وإطار C+++ المقترح.</p>
+    <p class="ar-copy" lang="ar" dir="rtl">تقدم هذه المقدمة التحريرية الرؤية العلمية للمجموعة من خلال تتبع تطور أنظمة الطاقة المستدامة، وإبراز دمج مصادر الطاقة المتجددة، وتخزين الطاقة، وتدفق الاستطاعة الأمثل الآني، وإطار <bdi dir="ltr">C+++</bdi> المقترح.</p>
   </div>
   <div class="published-book-action">
     <a class="button primary" href="https://archive.org/details/@aouss_gabash" target="_blank" rel="noopener noreferrer">Explore Digital Library | استكشف المكتبة الرقمية</a>
