@@ -6,7 +6,7 @@
   const shortenAgaiButtonLabel = () => {
     const button = document.querySelector('.hero-actions .button.primary[href*="ai.aoussgabash.com"]');
     if (!button) return;
-    button.textContent = 'Open AGAI | افتح منصة AGAI';
+    button.innerHTML = '<bdi lang="en" dir="ltr">Open AGAI</bdi> | <bdi lang="ar" dir="rtl">افتح منصة <bdi dir="ltr">AGAI</bdi></bdi>';
     button.setAttribute('aria-label', 'Open AGAI | افتح منصة AGAI');
   };
 
