@@ -16,7 +16,7 @@
     footer.innerHTML = `
       <div class="ag-central-footer-inner">
         <p class="ag-central-footer-line">© ${config.footer.year} ${config.owner.en} <span class="ag-central-footer-sep" aria-hidden="true">|</span> <span class="ag-central-footer-ar" lang="ar" dir="rtl">${config.owner.ar}</span></p>
-        <p class="ag-central-footer-line">${config.ecosystem.en} <span class="ag-central-footer-sep" aria-hidden="true">|</span> <span class="ag-central-footer-ar" lang="ar" dir="rtl">${config.ecosystem.ar}</span></p>
+        <p class="ag-central-footer-line">${config.ecosystem.en} <span class="ag-central-footer-sep" aria-hidden="true">|</span> <span class="ag-central-footer-ar" lang="ar" dir="rtl">${config.ecosystem.ar.replace(/\bAG\b/g, '<bdi dir="ltr">AG</bdi>')}</span></p>
         <p class="ag-central-footer-line">${config.country.en} <span class="ag-central-footer-sep" aria-hidden="true">|</span> <span class="ag-central-footer-ar" lang="ar" dir="rtl">${config.country.ar}</span></p>
         <p class="ag-central-footer-line"><a class="ag-central-footer-link" href="${config.links.siteInformation}">${config.footer.siteInformationLabel.en} <span class="ag-central-footer-sep" aria-hidden="true">|</span> <span class="ag-central-footer-ar" lang="ar" dir="rtl">${config.footer.siteInformationLabel.ar}</span></a></p>
       </div>`;
