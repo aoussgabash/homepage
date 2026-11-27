@@ -9,23 +9,23 @@ main.hero{flex:1}main.hero h1{font-size:clamp(2rem,6vw,3.8rem);line-height:1.4;l
 #library details{margin:.75rem 0 1.5rem}#library summary{font-size:clamp(1.2rem,3vw,1.65rem);font-weight:700;cursor:pointer}
 #library p{margin:.8rem 0}#library small{color:#7dd3fc}
 button,input{font:inherit}button{cursor:pointer}
-.ag-access-dialog{width:min(28rem,calc(100% - 2rem));max-height:90vh;overflow:auto;text-align:center;min-height:0;display:block;transform:none!important;box-shadow:var(--shadow)}
-dialog::backdrop{background:rgba(7,17,31,.55);backdrop-filter:blur(3px)}
-.ag-access-dialog h2{margin:0;font-size:1.5rem}.ag-access-dialog p{margin:.5rem 0 1rem}
-#pw{display:block;width:100%;margin:.5rem 0 .9rem;padding:.75rem 1rem;border:1px solid #67829a;border-radius:12px;background:var(--bg);color:white;direction:ltr}
-:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.ag-password-toggle{display:inline-flex;align-items:center;gap:.55rem;cursor:pointer}.ag-password-toggle input{accent-color:var(--accent)}
-.ag-access-actions{display:flex;gap:.75rem}.ag-access-actions button{flex:1}.ag-access-dialog #msg{color:#fecaca}.ag-access-error:empty{display:none}
-.ag-access-actions{margin-top:1.25rem}.button.primary{background:#0369a1;border:1px solid #7dd3fc}.download{margin:.5rem 0}
+.ag-access-dialog{--panel:#192a3f;--panel2:#151f2d;--line:#2c3b4e;--bg:#0f1721;--text:#f4f8fb;--muted:#b9c7d6;--blue:#4fbbf7;color:var(--text);font:1rem/1.75 Arial,Tahoma,sans-serif;max-height:calc(100dvh - 36px);overflow:auto}
+dialog::backdrop{background:rgba(2,8,15,.82);backdrop-filter:blur(7px)}
+.ag-access-dialog .ag-password-toggle{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin:12px auto 2px;color:var(--muted);cursor:pointer;font-size:.88rem;line-height:1.5;flex-wrap:wrap}.ag-access-dialog .ag-password-toggle input[type="checkbox"]{appearance:auto;width:18px;height:18px;min-width:18px;margin:0;padding:0;border:0;border-radius:3px;accent-color:var(--blue);flex:none}.ag-access-dialog input#ag-access-password{width:100%}
+.ag-access-dialog{width:min(440px,calc(100% - 36px));padding:28px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:19px;box-shadow:0 25px 70px rgba(0,0,0,.5);text-align:center}
+.ag-access-dialog h2{margin:0 0 6px}.ag-access-dialog p{color:var(--muted);margin:8px 0 18px}.ag-access-dialog input{width:100%;font:inherit;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;direction:ltr;text-align:left}.ag-access-dialog input:focus{outline:2px solid var(--blue)}.ag-access-actions{display:flex;gap:10px;margin-top:16px}.ag-access-actions button{flex:1;padding:12px;border-radius:10px;font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--text)}.ag-access-actions button[type=submit]{background:var(--blue);color:#06101c;font-weight:bold}.ag-access-error{min-height:1.6em;color:#fca5a5!important;margin:8px 0!important}
+.ag-access-dialog h2{font-size:1.5rem;line-height:1.75}.ag-access-dialog input:focus{outline-offset:0}.ag-access-dialog #pw{display:block}
+.button.primary{background:#0369a1;border:1px solid #7dd3fc}.download{margin:.5rem 0}
 </style></head><body>
 <header class="site-header" dir="ltr"><div class="container nav-wrap"><a class="brand brand-identity" href="/" aria-label="AG academic homepage | الصفحة الأكاديمية الرئيسية">
         <img class="brand-logo" src="assets/brand/AG.svg" width="52" height="52" alt="AG Academic Ecosystem logo | شعار منظومة AG الأكاديمية">
         <span class="brand-code"><span class="ag">AG</span></span>
         <span class="brand-name">Aouss Gabash</span>
-      </a><a class="portal-link" href="/#projects" lang="ar">البوابة الأكاديمية</a></div></header><main class="hero"><div class="container"><h1>استوديو المحاضرات</h1><dialog class="ag-access-dialog project-card featured" id="login" dir="ltr" aria-labelledby="login-title"><form id="gate">
+      </a><a class="portal-link" href="/#projects" lang="ar">البوابة الأكاديمية</a></div></header><main class="hero"><div class="container"><h1>استوديو المحاضرات</h1><dialog class="ag-access-dialog" id="login" dir="ltr" aria-labelledby="login-title"><form id="gate">
 <h2 id="login-title" lang="ar" dir="rtl">دخول <bdi lang="en" dir="ltr">Public Lectures</bdi></h2><p>Public Lectures | المحاضرات العلمية العامة</p>
 <label for="pw">Enter password | يرجى إدخال كلمة المرور</label><input id="pw" autofocus type="password" required spellcheck="false" autocomplete="current-password">
 <label class="ag-password-toggle"><input id="visible" type="checkbox">Show password | إظهار كلمة المرور</label>
-<p class="ag-access-error" id="msg" role="alert"></p><div class="ag-access-actions"><button class="button secondary" type="button" id="cancel">Cancel | إلغاء</button><button class="button primary" type="submit">Enter | دخول</button></div></form></dialog>
+<p class="ag-access-error" id="msg" role="alert"></p><div class="ag-access-actions"><button type="button" id="cancel">Cancel | إلغاء</button><button type="submit">Enter | دخول</button></div></form></dialog>
 <section id="library" class="project-card" hidden></section></div></main><footer class="site-footer">
   <div class="container footer-wrap ag-global-footer">
     <span>© 2026 Dr.-Ing. Aouss Gabash | <span lang="ar" dir="rtl">الدكتور المهندس أوس غباش</span></span>
