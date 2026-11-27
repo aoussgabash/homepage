@@ -22,6 +22,8 @@ dialog::backdrop{background:rgba(2,8,15,.82);backdrop-filter:blur(7px)}
 #deck-nav,.deck-tools{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:.8rem 0}#deck button{background:#193149;color:white;border:1px solid #53718a;border-radius:.6rem;padding:.5rem .9rem}#deck button:disabled{opacity:.45}#deck #export-slides{background:#126295}#slide-form{padding:1rem;background:#13293e}#slide-form label{display:block;margin:.7rem 0}#slide-form input,#slide-form textarea{display:block;width:100%;padding:.6rem;font:inherit}#deck:fullscreen{background:#101e2e;padding:2vw;overflow:auto;max-width:none}#deck:fullscreen .deck-tools{display:none}
 @page{size:320mm 180mm;margin:0}
 @media print{html,body{display:block!important;margin:0!important;padding:0!important;background:white!important}body>*:not(#print-deck){display:none!important}#print-deck{display:block!important}#print-deck .slide-page{width:320mm;height:180mm;min-height:0;padding:10mm 15mm;gap:5mm;break-inside:avoid;break-after:page;box-sizing:border-box;background:white;color:#10283e;border-top:3mm solid #268f8c}#print-deck .slide-page:last-child{break-after:auto}#print-deck h2{font-size:22pt}#print-deck p{font-size:14pt;line-height:1.45}#print-deck [lang=en]{padding-top:4mm}}
+#lecture-index[hidden],#back-index[hidden],#studio-lock[hidden]{display:none}
+#lecture-index{max-width:52rem;margin:2rem 0 1rem}#open-lecture{display:grid;width:100%;gap:.5rem;text-align:start;color:#fff;background:linear-gradient(140deg,#19334c,#122638);border:1px solid #39546e;border-radius:16px;padding:1.2rem 1.5rem}#open-lecture:hover,#open-lecture:focus-visible{border-color:#55bdf3}#lecture-label{font-size:clamp(1.1rem,2.4vw,1.5rem);line-height:1.65}.lecture-number,.lecture-action{color:#8ad7ff}#back-index{margin-block-start:1.25rem}#studio-lock{margin-block:1rem}
 </style></head><body>
 <header class="site-header" dir="ltr"><div class="container nav-wrap"><a class="brand brand-identity" href="/" aria-label="AG academic homepage | الصفحة الأكاديمية الرئيسية">
         <img class="brand-logo" src="assets/brand/AG.svg" width="52" height="52" alt="AG Academic Ecosystem logo | شعار منظومة AG الأكاديمية">
@@ -38,6 +40,9 @@ let savedStudioKey=null;
 try{savedStudioKey=sessionStorage.getItem(studioSession)}catch{}
 if(!savedStudioKey)document.getElementById('login').showModal();
 </script>
+<section id="lecture-index" hidden aria-label="فهرس المحاضرات"><button id="open-lecture" type="button" aria-controls="library deck"><span class="lecture-number">المحاضرة 1</span><strong id="lecture-label"></strong><span class="lecture-action">فتح المحاضرة ←</span></button></section>
+<button id="studio-lock" hidden class="button secondary" type="button">إغلاق الاستوديو</button>
+<button id="back-index" class="button secondary" type="button" hidden>العودة إلى فهرس المحاضرات</button>
 <section id="library" class="project-card" hidden></section><section id="deck" aria-label="عرض الشرائح" hidden>
 <div id="slide" aria-live="polite"></div>
 <nav id="deck-nav" aria-label="التنقل بين الشرائح"><button id="prev-slide">السابقة</button><span id="slide-count"></span><button id="next-slide">التالية</button><button id="full-slide">ملء الشاشة</button></nav>
@@ -98,7 +103,7 @@ async function setupDeck(lecture,rawKey){
    localStorage.setItem(draftKey,JSON.stringify({iv:encode(iv),data:encode(data)}));slides=next;current=index;form.hidden=true;render()
   }catch{byId('save-error').textContent='تعذر حفظ الشريحة. تحقق من العنوانين وإتاحة تخزين المتصفح.'}finally{button.disabled=false}
  };
- render();byId('deck').hidden=false
+ render();
 }
 
 async function openLecture(rawKey){
@@ -110,7 +115,18 @@ async function openLecture(rawKey){
  byId('lock').onclick=()=>{try{sessionStorage.removeItem(studioSession)}catch{} URL.revokeObjectURL(byId('pdf').href);location.reload()};
  byId('title').textContent=lecture.title;byId('pdf').href=URL.createObjectURL(new Blob([bytes(lecture.pdf)],{type:'application/pdf'}));
  await setupDeck(lecture,rawKey);
- byId('pw').value='';byId('studio-heading').hidden=false;byId('library').hidden=false;login.close();byId('msg').textContent='';
+ byId('lecture-label').textContent=lecture.title;
+ byId('studio-lock').onclick=byId('lock').onclick;
+ function showLecture(open){
+  byId('lecture-index').hidden=open;
+  byId('studio-lock').hidden=open;
+  byId('back-index').hidden=!open;
+  byId('library').hidden=!open;
+  byId('deck').hidden=!open;
+ }
+ byId('open-lecture').onclick=()=>{showLecture(true);byId('back-index').focus()};
+ byId('back-index').onclick=()=>{showLecture(false);byId('open-lecture').focus()};
+ byId('pw').value='';byId('studio-heading').hidden=false;showLecture(false);login.close();byId('msg').textContent='';
 }
 byId('gate').onsubmit=async event=>{
  event.preventDefault();
