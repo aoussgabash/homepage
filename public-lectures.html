@@ -1,20 +1,39 @@
-<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>استوديو المحاضرات | Lecture Studio</title>
-<style>*{box-sizing:border-box}body{margin:0;background:#0d1926;color:#f5f8fc;font:1.1rem/1.85 system-ui,sans-serif}header,main{width:min(52rem,90%);margin:auto}header{padding:2rem 0;border-bottom:1px solid #405365;color:#94e7db}main{padding:3rem 0}h1,h2{line-height:1.5}section{background:#192c40;border:1px solid #365067;border-radius:1rem;padding:clamp(1.2rem,4vw,2.5rem)}label,input{display:block}input,button,a.download{font:inherit;border-radius:.45rem;padding:.5rem 1rem}input{width:min(100%,24rem);margin:.5rem 0 1rem}button,a.download{border:0;background:#9ce4d9;color:#10283e;cursor:pointer;text-decoration:none}#msg{color:#ffd298}small{color:#b6cecc}details{margin:.7rem 0 1rem}summary{cursor:pointer;font-size:1.45rem;font-weight:bold}a{color:inherit}:root{--bg:#06101c;--bg2:#091827;--panel:#10263d;--panel2:#0b1a2b;--line:#26394d;--text:#f4f8fb;--muted:#b9c7d6;--blue:#38bdf8;--gold:#fbbf24}
-.ag-access-dialog .ag-password-toggle{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin:12px auto 2px;color:var(--muted);cursor:pointer;font-size:.88rem;line-height:1.5;flex-wrap:wrap}.ag-access-dialog .ag-password-toggle input[type="checkbox"]{appearance:auto;width:18px;height:18px;min-width:18px;margin:0;padding:0;border:0;border-radius:3px;accent-color:var(--blue);flex:none}.ag-access-dialog input#ag-access-password{width:100%}
-.ag-access-overlay[hidden]{display:none}.ag-access-overlay{position:fixed;inset:0;z-index:200;background:rgba(2,8,15,.82);display:grid;place-items:center;padding:18px;backdrop-filter:blur(7px)}
-.ag-access-dialog{width:min(440px,100%);padding:28px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:19px;box-shadow:0 25px 70px rgba(0,0,0,.5);text-align:center}
-.ag-access-dialog h2{margin:0 0 6px}.ag-access-dialog p{color:var(--muted);margin:8px 0 18px}.ag-access-dialog input{width:100%;font:inherit;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;direction:ltr;text-align:left}.ag-access-dialog input:focus{outline:2px solid var(--blue)}.ag-access-actions{display:flex;gap:10px;margin-top:16px}.ag-access-actions button{flex:1;padding:12px;border-radius:10px;font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--text)}.ag-access-actions button[type=submit]{background:var(--blue);color:#06101c;font-weight:bold}.ag-access-error{min-height:1.6em;color:#fca5a5!important;margin:8px 0!important}
-
-dialog.ag-access-dialog{padding:28px;color:var(--text);max-width:calc(100% - 36px);font:1rem/1.6 system-ui,sans-serif}
-dialog::backdrop{background:rgba(2,8,15,.82);backdrop-filter:blur(7px)}
-.ag-access-dialog input{margin:0;max-width:none}.ag-access-dialog label{display:block}.ag-access-dialog .ag-password-toggle{display:inline-flex}
-</style>
-<header><a href="https://aoussgabash.com/#projects">البوابة الأكاديمية | Academic Portal</a></header><main><h1>استوديو المحاضرات</h1><dialog class="ag-access-dialog" id="login" dir="ltr" aria-labelledby="login-title"><form id="gate">
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>استوديو المحاضرات | Lecture Studio</title>
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="identity.css">
+<style>
+body{display:flex;flex-direction:column;min-height:100vh}
+main.hero{flex:1}main.hero h1{font-size:clamp(2rem,6vw,3.8rem);line-height:1.4;letter-spacing:0}
+.portal-link{color:#dbeafe;font-weight:700;text-decoration:none}
+#library{margin-top:2rem;max-width:52rem}
+#library[hidden],dialog:not([open]){display:none}
+#library details{margin:.75rem 0 1.5rem}#library summary{font-size:clamp(1.2rem,3vw,1.65rem);font-weight:700;cursor:pointer}
+#library p{margin:.8rem 0}#library small{color:#7dd3fc}
+button,input{font:inherit}button{cursor:pointer}
+.ag-access-dialog{width:min(28rem,calc(100% - 2rem));max-height:90vh;overflow:auto;text-align:center;min-height:0;display:block;transform:none!important;box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(7,17,31,.55);backdrop-filter:blur(3px)}
+.ag-access-dialog h2{margin:0;font-size:1.5rem}.ag-access-dialog p{margin:.5rem 0 1rem}
+#pw{display:block;width:100%;margin:.5rem 0 .9rem;padding:.75rem 1rem;border:1px solid #67829a;border-radius:12px;background:var(--bg);color:white;direction:ltr}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.ag-password-toggle{display:inline-flex;align-items:center;gap:.55rem;cursor:pointer}.ag-password-toggle input{accent-color:var(--accent)}
+.ag-access-actions{display:flex;gap:.75rem}.ag-access-actions button{flex:1}.ag-access-dialog #msg{color:#fecaca}.ag-access-error:empty{display:none}
+.ag-access-actions{margin-top:1.25rem}.button.primary{background:#0369a1;border:1px solid #7dd3fc}.download{margin:.5rem 0}
+</style></head><body>
+<header class="site-header" dir="ltr"><div class="container nav-wrap"><a class="brand brand-identity" href="/" aria-label="AG academic homepage | الصفحة الأكاديمية الرئيسية">
+        <img class="brand-logo" src="assets/brand/AG.svg" width="52" height="52" alt="AG Academic Ecosystem logo | شعار منظومة AG الأكاديمية">
+        <span class="brand-code"><span class="ag">AG</span></span>
+        <span class="brand-name">Aouss Gabash</span>
+      </a><a class="portal-link" href="/#projects" lang="ar">البوابة الأكاديمية</a></div></header><main class="hero"><div class="container"><h1>استوديو المحاضرات</h1><dialog class="ag-access-dialog project-card featured" id="login" dir="ltr" aria-labelledby="login-title"><form id="gate">
 <h2 id="login-title" lang="ar" dir="rtl">دخول <bdi lang="en" dir="ltr">Public Lectures</bdi></h2><p>Public Lectures | المحاضرات العلمية العامة</p>
 <label for="pw">Enter password | يرجى إدخال كلمة المرور</label><input id="pw" autofocus type="password" required spellcheck="false" autocomplete="current-password">
 <label class="ag-password-toggle"><input id="visible" type="checkbox">Show password | إظهار كلمة المرور</label>
-<p class="ag-access-error" id="msg" role="alert"></p><div class="ag-access-actions"><button type="button" id="cancel">Cancel | إلغاء</button><button type="submit">Enter | دخول</button></div></form></dialog>
-<section id="library" hidden></section></main>
+<p class="ag-access-error" id="msg" role="alert"></p><div class="ag-access-actions"><button class="button secondary" type="button" id="cancel">Cancel | إلغاء</button><button class="button primary" type="submit">Enter | دخول</button></div></form></dialog>
+<section id="library" class="project-card" hidden></section></div></main><footer class="site-footer">
+  <div class="container footer-wrap ag-global-footer">
+    <span>© 2026 Dr.-Ing. Aouss Gabash | <span lang="ar" dir="rtl">الدكتور المهندس أوس غباش</span></span>
+    <span><bdi lang="en" dir="ltr">AG Academic Ecosystem</bdi> | <span lang="ar" dir="rtl">منظومة <bdi dir="ltr">AG</bdi> الأكاديمية</span></span>
+    <span>Syria | <span lang="ar" dir="rtl">سوريا</span></span>
+    <span><a href="https://aoussgabash.com/site-information.html">Site Information | <span lang="ar" dir="rtl">بيانات الموقع</span></a></span>
+  </div>
+</footer>
 <script>
 const byId=id=>document.getElementById(id);
 const login=byId('login');
@@ -34,10 +53,11 @@ byId('gate').onsubmit=async event=>{
  const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:bytes(entry.iv)},key,bytes(entry.data));
  const lecture=JSON.parse(new TextDecoder().decode(plain));
  byId('library').innerHTML=lecture.layout;
+ byId('pdf').classList.add('button','primary');byId('lock').classList.add('button','secondary');
  byId('lock').onclick=()=>{URL.revokeObjectURL(byId('pdf').href);location.reload()};
  byId('title').textContent=lecture.title;byId('pdf').href=URL.createObjectURL(new Blob([bytes(lecture.pdf)],{type:'application/pdf'}));
  byId('pw').value='';login.close();byId('library').hidden=false;byId('msg').textContent='';
  }catch(error){byId('msg').textContent=error.name==='OperationError'?'Incorrect password | كلمة المرور غير صحيحة':'تعذر فتح المحاضرة. أعد المحاولة.';}finally{button.disabled=false}
 };
 
-</script></html>
+</script></body></html>
